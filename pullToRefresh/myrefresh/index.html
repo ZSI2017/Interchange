@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+  <title>pulltofresh</title>
+
+  <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/antui.css" />
+  <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/??widget/message.css,widget/notice.css,widget/page-result.css" />
+  <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/widget/dialog.css">
+  <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/widget/loading.css" />
+  <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/icon/page-result-nofound.css" />
+  <script src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
+  <script src="./common.js"></script>
+  <style>
+    ul>li {
+      width: 100%;
+      height: 300px;
+      background-color: yellow;
+      border-bottom: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <div id="mesage1" style="font-size:16px;text-align:center;line-height:1;">
+    <div class="am-loading" aria-label="加载中" style="padding-top:0.04rem;padding-bottom:0">
+      <i class="am-icon loading" aria-hidden="true"></i>
+    </div>
+  <p style="color:#d2d2d2">正在刷新...</p> -->
+  <!-- </div> -->
+  <div id="message2" style="position:absolute;top:0;left:0;z-index:-1; margin:20px auto;font-size:16px;text-align:center">
+    <p style="color:#d2d2d2">下拉刷新</p>
+  </div>
+  <ul class="content" id="content" style="transform:translate(0px,100px)">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li></li>
+    <li>4</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+  </ul>
+
+  <script>
+    pushDownRefresh(function(dist) {
+      console.log("dist " + (0 - dist) + "px");
+      $("#mesage1").show();
+      $("#message2").hide();
+    }, function() {
+      $("#mesage1").hide();
+      $("#message2").show();
+    }, function() {
+      $("#mesage1").hide();
+      $("#message2").hide();
+      $("body").hide();
+      // showLoading();
+      //  window.location.reload();
+    }, "content", function() {
+      console.log("successsuccess")
+      // orderScuess(orderNo, wuliuStatus, function() {
+      //   $("#mesage1").hide();
+      //   $("#message2").hide();
+      // })
+    });
+  </script>
+
+</body>
+
+</html>
