@@ -20,20 +20,30 @@
       background-color: yellow;
       border-bottom: 1px solid black;
     }
+
+    .upwrap-progress {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      margin-right: 8px;
+      border-bottom-color: blue;
+      vertical-align: middle;
+
+    }
   </style>
 </head>
 
 <body>
-  <!-- <div id="mesage1" style="font-size:16px;text-align:center;line-height:1;">
-    <div class="am-loading" aria-label="加载中" style="padding-top:0.04rem;padding-bottom:0">
-      <i class="am-icon loading" aria-hidden="true"></i>
-    </div>
-  <p style="color:#d2d2d2">正在刷新...</p> -->
-  <!-- </div> -->
-  <div id="message2" style="position:absolute;top:0;left:0;z-index:-1; margin:20px auto;font-size:16px;text-align:center">
-    <p style="color:#d2d2d2">下拉刷新</p>
+  <div id="mesage1" style="font-size:16px;text-align:center;line-height:1;position:absolute;top:0;left:0;z-index:-1; margin:20px auto;font-size:16px;text-align:center;transition-duration: 0ms; transform: translateY(-75px) translateZ(0px); visibility: visible;">
+    <p id="upwrap-progress" class="upwrap-progress"></p>
+    <p id="setTitle" style="color:#d2d2d2">正在刷新...</p>
   </div>
-  <ul class="content" id="content" style="transform:translate(0px,100px)">
+  <!-- <div id="message2" style="position:absolute;top:0;left:0;z-index:-1; margin:20px auto;font-size:16px;text-align:center;transition-duration: 0ms; transform: translateY(-75px) translateZ(0px); visibility: visible;">
+    <p style="color:#d2d2d2">下拉刷新</p>
+  </div> -->
+  <ul class="content" id="content">
     <li>1</li>
     <li>2</li>
     <li>3</li>
