@@ -155,7 +155,17 @@ function pushDownRefresh(ListentEvent1, ListentEvent2, ListentEvent3, content1, 
 		if (_end < timeOut && $(window).scrollTop() <= 0) {
 			callback();
 		}
-	}, false);
+	});
+	content.addEventListener('touchcancel', (e) => {
+		touchendEvent(e);
+		endLose = false;
+		if (!refreshFlag) {
+			return;
+		}
+		if (_end < timeOut && $(window).scrollTop() <= 0) {
+			callback();
+		}
+	});
 }
 
 
@@ -171,6 +181,8 @@ function touchstartEvent(e) {
 	self.startY = e.touches ? e.touches[0].pageY : e.clientY;
 	// X的作用是用来计算方向，如果是横向，则不进行动画处理，避免误操作
 	self.startX = e.touches ? e.touches[0].pageX : e.clientX;
+
+	// e.preventDefault();
 };
 
 
@@ -242,15 +254,15 @@ function touchmoveEvent(e) {
 			}
 
 			var downOffset = self.offset,
-				dampRate = 1;
+				dampRate = 0.7;
 
 			if (self.downHight < downOffset) {
 				// 下拉距离  < 指定距离
-				dampRate = 1
+				dampRate = 0.7
 			} else {
 				document.querySelector("#setTitle span").innerHTML = "松开";
 				// 超出了指定距离，随时可以刷新
-				dampRate = 0.1
+				dampRate = 0.06
 			}
 
 			if (diff > 0) {
@@ -279,7 +291,7 @@ function touchmoveEvent(e) {
 }
 
 var touchendEvent = function (e) {
-	alert("ddd");
+	// alert("ddd");
 	var options = self.options;
 
 	// 需要重置状态
