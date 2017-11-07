@@ -1,16 +1,40 @@
-var EVENT_PULL = "pullHook"
+var EVENT_PULL = "pullHook",
+	EVENT_DOWN_LOADING = 'downLoading',
+	CLASS_ROTATE = 'minirefresh-rotate';
 
 var self = {
-	offset: 100,
+	offset: 60,
 
 	events: {
 		pullHook: function (downHeight, downOffset) {
 			FULL_DEGREE = 360;
+
+			if (downHeight < downOffset) {
+				// if (this.isCanPullDown) {
+				// 	this.downWrapTips.innerText = options.down.contentdown;
+				// 	this.isCanPullDown = false;
+				// 	this._changeWrapStatusClass(this.downWrap, CLASS_STATUS_DEFAULT);
+				// }
+				document.querySelector("#setTitle span").innerHTML = "下拉";
+			} else {
+				// if (!this.isCanPullDown) {
+				// 	this.downWrapTips.innerText = options.down.contentover;
+				// 	this.isCanPullDown = true;
+				// 	this._changeWrapStatusClass(this.downWrap, CLASS_STATUS_PULL);
+				// }
+				document.querySelector("#setTitle span").innerHTML = "放手";
+			}
+
+
 			var rate = downHeight / downOffset,
 				progress = FULL_DEGREE * rate;
 			var downWrapProgress = self.downWrapProgress
 			downWrapProgress.style.webkitTransform = 'rotate(' + progress + 'deg)';
 			downWrapProgress.style.transform = 'rotate(' + progress + 'deg)';
+		},
+		downLoading: function () {
+			var downWrapProgress = self.downWrapProgress;
+			downWrapProgress.classList.add(CLASS_ROTATE);
 		}
 	},
 	_translate: function (y, duration) {
@@ -28,13 +52,20 @@ var self = {
 		wrap.style.webkitTransform = 'translate(0px, ' + y + 'px) translateZ(0px)';
 		wrap.style.transform = 'translate(0px, ' + y + 'px) translateZ(0px)';
 
-		self._transformDownWrap(-75 + y);
+		self._transformDownWrap(-self.offset + y);
 	},
 	triggerDownLoading: function () {
 		// this.downLoading = true;
 		this.downHight = 0;
 		// this._translate(this.downHight, 300);
-		this._translate(0, 300);
+		this.downLoading = true;
+		this._translate(this.offset, 300);
+		document.querySelector("#setTitle span").innerHTML = "正在";
+		this.events[EVENT_DOWN_LOADING]();
+		setTimeout(function () {
+			self.endDownLoading();
+			self.downWrapProgress.classList.remove(CLASS_ROTATE);
+		}, 1000)
 		console.log("success");
 	},
 	_transformDownWrap: function (offset, duration, isForce) {
@@ -46,6 +77,20 @@ var self = {
 		this.downWrap.style.transitionDuration = duration + 'ms';
 		this.downWrap.style.webkitTransform = 'translateY(' + offset + 'px)  translateZ(0px)';
 		this.downWrap.style.transform = 'translateY(' + offset + 'px)  translateZ(0px)';
+	},
+	endDownLoading: function () {
+		var self = this,
+			options = this.options,
+			bounceTime = 300
+
+		if (this.downLoading) {
+
+			// 必须是loading时才允许结束
+			self._translate(0, bounceTime);
+			self.downHight = 0;
+			this.downLoading = false;
+			document.querySelector("#setTitle span").innerHTML = "下拉";
+		}
 	}
 };
 
@@ -120,8 +165,8 @@ function touchstartEvent(e) {
 	// 	e.preventDefault();
 	// }
 	// 记录startTop, 并且只有startTop存在值时才允许move
-	// self.startTop = scrollWrap.scrollTop;
-
+	self.startTop = content.scrollTop;
+	console.log(content.scrollTop);
 	// startY用来计算距离
 	self.startY = e.touches ? e.touches[0].pageY : e.clientY;
 	// X的作用是用来计算方向，如果是横向，则不进行动画处理，避免误操作
@@ -133,13 +178,17 @@ function touchmoveEvent(e) {
 	var options = self.options,
 		isAllowDownloading = true;
 
-	// if (self.downLoading) {
-	//     isAllowDownloading = false;
-	// } else if (!options.down.isAways && self.upLoading) {
-	//     isAllowDownloading = false;
-	// }
+	if (self.downLoading) {
+		isAllowDownloading = false;
+	}
 
-	if (true) {
+	// else if (!options.down.isAways && self.upLoading) {
+	// 	isAllowDownloading = false;
+	// }
+	document.querySelector("#minifresh").scrollTop;
+
+	console.log(`content.scrollTop${document.getElementById("minifresh").scrollTop}`);
+	if (self.startTop !== undefined && self.startTop <= 0 && document.getElementById("minifresh").scrollTop <= 0 && (isAllowDownloading)) {
 		// 列表在顶部且不在加载中，并且没有锁住下拉动画
 
 		// 当前第一个手指距离列表顶部的距离
@@ -179,7 +228,7 @@ function touchmoveEvent(e) {
 		// 	// 下一个版本中，分开成两种情况，一种是absolute的固定动画，一种是在scrollWrap内部跟随滚动的动画
 		// 	return;
 		// }
-		console.log(moveY);
+		// console.log(moveY);
 		if (moveY > 0) {
 			// 向下拉
 			self.isMoveDown = true;
@@ -199,9 +248,9 @@ function touchmoveEvent(e) {
 				// 下拉距离  < 指定距离
 				dampRate = 1
 			} else {
-				console.log(document.querySelector("#setTitle").innerHTML = "松开刷新")
+				document.querySelector("#setTitle span").innerHTML = "松开";
 				// 超出了指定距离，随时可以刷新
-				dampRate = 0.3
+				dampRate = 0.1
 			}
 
 			if (diff > 0) {
@@ -218,6 +267,8 @@ function touchmoveEvent(e) {
 			self._translate(self.downHight);
 		} else {
 			self.isBounce = true;
+			// 向下拉
+
 			// 解决嵌套问题。在嵌套有 IScroll，或类似的组件时，这段代码会生效，可以辅助滚动scrolltop
 			// 否则有可能在最开始滚不动
 			// if (scrollWrap.scrollTop <= 0) {
@@ -228,6 +279,7 @@ function touchmoveEvent(e) {
 }
 
 var touchendEvent = function (e) {
+	alert("ddd");
 	var options = self.options;
 
 	// 需要重置状态
@@ -242,9 +294,8 @@ var touchendEvent = function (e) {
 			self.downHight = 0;
 			// self.events[EVENT_CANCEL_LOADING] && self.events[EVENT_CANCEL_LOADING]();
 			// }
-
-			self.isMoveDown = false;
 		}
+		self.isMoveDown = false;
 	}
 
 	self.startY = 0;

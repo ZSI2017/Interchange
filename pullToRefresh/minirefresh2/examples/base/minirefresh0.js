@@ -395,7 +395,7 @@
 
 		var touchendEvent = function (e) {
 			var options = self.options;
-
+			// alert("dddssss")
 			// 需要重置状态
 			if (self.isMoveDown) {
 				// 如果下拉区域已经执行动画,则需重置回来
@@ -434,7 +434,7 @@
 			} else if (!options.down.isAways && self.upLoading) {
 				isAllowDownloading = false;
 			}
-
+			console.log(`self.startTop${self.startTop}`);
 			if (self.startTop !== undefined && self.startTop <= 0 &&
 				(isAllowDownloading) && !self.isLockDown) {
 				// 列表在顶部且不在加载中，并且没有锁住下拉动画
@@ -442,7 +442,8 @@
 				// 当前第一个手指距离列表顶部的距离
 				var curY = e.touches ? e.touches[0].pageY : e.clientY;
 				var curX = e.touches ? e.touches[0].pageX : e.clientX;
-
+				console.log(`curY${curY}`);
+				console.log(curY > clientHeight);
 				// 手指滑出屏幕触发刷新
 				if (curY > clientHeight) {
 					touchendEvent(e);
@@ -476,7 +477,7 @@
 					// 下一个版本中，分开成两种情况，一种是absolute的固定动画，一种是在scrollWrap内部跟随滚动的动画
 					return;
 				}
-
+				console.log(`moveY moveY moveY ${moveY}`);
 				if (moveY > 0) {
 					// 向下拉
 					self.isMoveDown = true;
@@ -499,7 +500,7 @@
 						// 超出了指定距离，随时可以刷新
 						dampRate = options.down.dampRate;
 					}
-
+					console.log(`diff diff diff ${diff}`);
 					if (diff > 0) {
 						// 需要加上阻尼系数
 						self.downHight += diff * dampRate;
@@ -507,12 +508,13 @@
 						// 向上收回高度,则向上滑多少收多少高度
 						self.downHight += diff;
 					}
-
+					console.log(`offset offset ${downOffset}`);
 					self.events[EVENT_PULL] && self.events[EVENT_PULL](self.downHight, downOffset);
 
 					// 执行动画
 					self._translate(self.downHight);
 				} else {
+
 					self.isBounce = true;
 					// 解决嵌套问题。在嵌套有 IScroll，或类似的组件时，这段代码会生效，可以辅助滚动scrolltop
 					// 否则有可能在最开始滚不动
