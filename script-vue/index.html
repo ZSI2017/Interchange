@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>多页面引入vue</title>
+  <script src="https://a.alipayobjects.com/g/h5-lib/vue/2.1.6/vue.min.js">
+  </script>
+  <script src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
+  <script type="text/javascript" src="https://a.alipayobjects.com/static/fastclick/1.0.6/fastclick.min.js"></script>
+  <script type="text/javascript" src="./common.js"></script>
+</head>
+
+<body>
+  <p> 直接引入 js 文件</p>
+  <div id="app">
+    {{message}}
+    <a @click="doSomething">...</a>
+    <ol>
+      <li v-for="todo in todos">
+        {{todo.text}}
+      </li>
+    </ol>
+    <p v-if="seen">现在你看到我了</p>
+
+    <button v-on:click="counter += 1">增加 1</button>
+    <p>这个按钮被点击了 {{ counter }} 次。</p>
+  </div>
+</body>
+
+</html>
