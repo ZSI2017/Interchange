@@ -4,15 +4,12 @@
  * Marquees for the new millenium v1.0
  * MIT License
  */
-  alert("dsfasdfsadfasdf")
 ;(function(root, factory) {
-  alert("dsfasdfsadfasdf")
   if (typeof define === 'function' && define.amd) {
     define([], factory);
   } else if (typeof exports === 'object') {
     module.exports = factory();
   } else {
-    alert(root)
     root.Marquee3k = factory();
   }
 }(this, function() {
@@ -52,12 +49,12 @@
       this.content.style.display = 'inline-block';
       this.contentWidth = this.content.offsetWidth;
 
+    //   这里来判断 要复制几个 公告，
       this.requiredReps = this.contentWidth > this.parentProps.width ? 2 : Math.ceil((this.parentProps.width - this.contentWidth) / this.contentWidth) + 1;
 
       for (let i = 0; i < this.requiredReps; i++) {
         this._createClone();
       }
-
       if (this.reverse) {
         this.offset = this.contentWidth * -1;
       }
@@ -86,6 +83,8 @@
       if (!this.paused) {
         const isScrolled = this.reverse ? this.offset < 0 : this.offset > this.contentWidth * -1;
         const direction = this.reverse ? -1 : 1;
+        console.log(this.reverse);
+        console.log(direction)
         const reset = this.reverse ? this.contentWidth * -1 : 0;
 
         if (isScrolled) this.offset -= this.speed * direction;
@@ -123,12 +122,10 @@
     }
 
     static init(options = { selector: 'marquee3k' }) {
-      alert("dsfasdfsdfsadf")
       window.MARQUEES = [];
       const marquees = Array.from(document.querySelectorAll(`.${options.selector}`));
       let previousWidth = window.innerWidth;
       let timer;
-      alert(marquees)
       for (let i = 0; i < marquees.length; i++) {
         const marquee = marquees[i];
         const instance = new Marquee3k(marquee, options);
