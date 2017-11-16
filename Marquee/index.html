@@ -19,6 +19,13 @@
 </div>
 <script>
      Marquee3k.init()
+     setTimeout(()=>{
+       console.log( document.querySelectorAll(".marquee3k__copy"));
+       document.querySelectorAll(".marquee3k__copy").forEach(function(item){
+             item.innerHTML = "asdfsdfwesdfsd"
+       })
+       // Marquee3k.refreshMarquee("newContent")
+     },1000)
 </script>
 
 </body>

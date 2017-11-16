@@ -110,6 +110,16 @@
         }
       }
     }
+    static refreshMarquee(newContent){
+       window.cancelAnimationFrame(window.stop);
+       for (let i = 0; i < MARQUEES.length; i++) {
+           MARQUEES[i].content.innerHTML = "nassdfasd";
+           MARQUEES[i].wrapper.innerHTML = "";
+       }
+
+
+
+    }
 
     static refresh(index) {
       MARQUEES[index]._refresh();
@@ -138,7 +148,7 @@
         for (let i = 0; i < MARQUEES.length; i++) {
           MARQUEES[i].animate();
         }
-        window.requestAnimationFrame(animate);
+          window.stop = window.requestAnimationFrame(animate);
       }
 
       window.addEventListener('resize', () => {
