@@ -48,6 +48,7 @@
       this.content.classList.add(`${this.selector}__copy`);
       this.content.style.display = 'inline-block';
       this.contentWidth = this.content.offsetWidth;
+      alert(this.contentWidth)
 
     //   这里来判断 要复制几个 公告，
       this.requiredReps = this.contentWidth > this.parentProps.width ? 2 : Math.ceil((this.parentProps.width - this.contentWidth) / this.contentWidth) + 1;
@@ -96,6 +97,7 @@
     }
 
     _refresh() {
+      this.repopulate((this.contentWidth - this.content.offsetWidth)*this.requiredReps,this.contentWidth>this.content.offsetWidth)
       this.contentWidth = this.content.offsetWidth;
     }
 
@@ -111,10 +113,18 @@
       }
     }
     static refreshMarquee(newContent){
-       window.cancelAnimationFrame(window.stop);
+       // window.cancelAnimationFrame(window.stop);
        for (let i = 0; i < MARQUEES.length; i++) {
-           MARQUEES[i].content.innerHTML = "nassdfasd";
-           MARQUEES[i].wrapper.innerHTML = "";
+         var _this = MARQUEES[i]
+           _this.content.innerHTML = newContent;
+           _this.wrapper.innerHTML = "";
+           _this._setupWrapper();
+           _this._setupContent();
+           _this._setupEvents();
+
+           _this.wrapper.appendChild(_this.content);
+           _this.element.appendChild(_this.wrapper);
+
        }
 
 
