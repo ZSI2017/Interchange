@@ -7,8 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
   <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.0/rem/antui.css" />
   <link rel="stylesheet" href="https://as.alipayobjects.com/g/h5-lib/antui/9.9.0-2/rem/??widget/popmenu.css,widget/bubble.css,widget/notice.css,widget/inform.css,widget/dialog.css" />
-  <script src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
-  <script src="./marquee3k1116.min.js"></script>
+  <script src="./Marquee3k.js"></script>
 </head>
 
 <body>
@@ -17,61 +16,23 @@
       <div class="marquee3k" data-speed="0.6" data-pausable="bool">
         <!--you can even have inline images,
  or any kind of html -->
-        <h1 style="font-size:.14rem">
-       <span style="vertical-align: middle;line-height: normal;">银行卡银行卡银行卡银行卡银行卡银行卡银行卡银行卡</span>
-         &nbsp;&nbsp;&nbsp;
-   </h1>
-
-      </div>
-    </div>
-  </div>
-  <script>
-    cancelAnimationFrame(window.stop)
-    window.MARQUEES = [];
-    $(".marquee3k").empty();
-    var aHTML = "银行银行银行银行银行银行银行银行银行银行银行银行"
-    $(".am-notice-content").empty();
-    $(".am-notice-content").html(
-      '<div class="marquee3k" data-speed="0.6" data-pausable="bool">\
-         <h1 style="font-size:.14rem">\
-        <span style="vertical-align: middle;line-height: normal;">' +
-      aHTML +
-      '</span>\
-          &nbsp;&nbsp;&nbsp;\
-    </h1>\
-       </div>'
-    )
-    window.cancelAnimationFrame(window.stop)
-    // $(".marquee3k__copy span").html("银行卡银行卡银行卡银行卡银行卡银行卡银行卡银行卡")
-    Marquee3k.init()
-
-    Marquee3k.refreshAll();
-
-    setInterval(() => {
-      console.log("asdddddddddddddddddddddddddddddd");
-      cancelAnimationFrame(window.stop)
-      window.MARQUEES = [];
-      $(".marquee3k").empty();
-      var aHTML = "dafsdfasdfsd"
-      $(".am-notice-content").empty();
-      $(".am-notice-content").html(
-        '<div class="marquee3k" data-speed="0.6" data-pausable="bool">\
-             <h1 style="font-size:.14rem">\
-            <span style="vertical-align: middle;line-height: normal;">' +
-        aHTML +
-        '</span>\
-              &nbsp;&nbsp;&nbsp;\
-        </h1>\
-           </div>'
-      )
-      window.cancelAnimationFrame(window.stop)
-      // $(".marquee3k__copy span").html("银行卡银行卡银行卡银行卡银行卡银行卡银行卡银行卡")
-      Marquee3k.init()
-
-      Marquee3k.refreshAll();
-
-    }, 3000)
-  </script>
+        <h1 style="font-size:.14rem"><span style="vertical-align: middle;
+	line-height: normal;">kk</span>&nbsp;&nbsp;&nbsp;</h2>
+     </div>
+     </div>
+</div>
+<script>
+     Marquee3k.init()
+     setInterval(()=>{
+       // console.log( document.querySelectorAll(".marquee3k__copy"));
+       document.querySelectorAll(".marquee3k__copy span").forEach(function(item){
+             item.innerHTML = "银行卡银行卡银行卡银行卡银行卡银行卡银行卡银行卡"
+          });
+         // Marquee3k.refreshMarquee("dafdfasdf");
+          // Marquee3k.init()
+       Marquee3k.refreshAll();
+     },100)
+</script>
 
 </body>
 
