@@ -48,7 +48,6 @@
       this.content.classList.add(`${this.selector}__copy`);
       this.content.style.display = 'inline-block';
       this.contentWidth = this.content.offsetWidth;
-      alert(this.contentWidth)
 
     //   这里来判断 要复制几个 公告，
       this.requiredReps = this.contentWidth > this.parentProps.width ? 2 : Math.ceil((this.parentProps.width - this.contentWidth) / this.contentWidth) + 1;
@@ -81,16 +80,15 @@
 
     animate() {
       if (!this.paused) {
-        ;
         const isScrolled = this.reverse ? this.offset < 0 : this.offset > this.contentWidth * -1;
         const direction = this.reverse ? -1 : 1;
         const reset = this.reverse ? this.contentWidth * -1 : 0;
 
         if (isScrolled) this.offset -= this.speed * direction;
         else this.offset = reset;
-          console.log(this.offset);
         this.wrapper.style.whiteSpace = 'nowrap';
         this.wrapper.style.transform = `translate(${this.offset}px, 0) translateZ(0)`;
+
       }
     }
 
@@ -148,7 +146,7 @@
         const instance = new Marquee3k(marquee, options);
         MARQUEES.push(instance);
       }
-
+      console.log(this.wrapper);
       animate();
 
       function animate() {
