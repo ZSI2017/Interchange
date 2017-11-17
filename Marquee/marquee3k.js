@@ -51,7 +51,6 @@
 
     //   这里来判断 要复制几个 公告，
       this.requiredReps = this.contentWidth > this.parentProps.width ? 2 : Math.ceil((this.parentProps.width - this.contentWidth) / this.contentWidth) + 1;
-
       for (let i = 0; i < this.requiredReps; i++) {
         this._createClone();
       }
@@ -81,15 +80,14 @@
 
     animate() {
       if (!this.paused) {
+        ;
         const isScrolled = this.reverse ? this.offset < 0 : this.offset > this.contentWidth * -1;
         const direction = this.reverse ? -1 : 1;
-        console.log(this.reverse);
-        console.log(direction)
         const reset = this.reverse ? this.contentWidth * -1 : 0;
 
         if (isScrolled) this.offset -= this.speed * direction;
         else this.offset = reset;
-
+          console.log(this.offset);
         this.wrapper.style.whiteSpace = 'nowrap';
         this.wrapper.style.transform = `translate(${this.offset}px, 0) translateZ(0)`;
       }
@@ -136,11 +134,12 @@
 
       function animate() {
         for (let i = 0; i < MARQUEES.length; i++) {
-          MARQUEES[i].animate();
+           MARQUEES[i].animate();
         }
-        window.requestAnimationFrame(animate);
-      }
 
+        window.t =  window.requestAnimationFrame(animate);
+         // = window.setTimeout(animate,1000/60)
+      }
       window.addEventListener('resize', () => {
         clearTimeout(timer);
 
