@@ -110,25 +110,24 @@
         }
       }
     }
-    static refreshMarquee(newContent){
-       // window.cancelAnimationFrame(window.stop);
-       for (let i = 0; i < MARQUEES.length; i++) {
-         var _this = MARQUEES[i]
-           _this.content.innerHTML = newContent;
-           _this.wrapper.innerHTML = "";
-           _this._setupWrapper();
-           _this._setupContent();
-           _this._setupEvents();
-
-           _this.wrapper.appendChild(_this.content);
-           _this.element.appendChild(_this.wrapper);
-
-       }
-
-
-
-    }
-
+    // static refreshMarquee(newContent){
+    //    // window.cancelAnimationFrame(window.stop);
+    //    for (let i = 0; i < MARQUEES.length; i++) {
+    //      var _this = MARQUEES[i]
+    //        _this.content.innerHTML = newContent;
+    //        _this.wrapper.innerHTML = "";
+    //        _this._setupWrapper();
+    //        _this._setupContent();
+    //        _this._setupEvents();
+    //
+    //        _this.wrapper.appendChild(_this.content);
+    //        _this.element.appendChild(_this.wrapper);
+    //
+    //    }
+    //
+    //
+    //
+    // }
     static refresh(index) {
       MARQUEES[index]._refresh();
     }

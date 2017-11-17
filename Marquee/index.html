@@ -23,10 +23,12 @@
 </div>
 <script>
      Marquee3k.init()
+     var i = 0;
      setInterval(()=>{
+       i++;
        // console.log( document.querySelectorAll(".marquee3k__copy"));
        document.querySelectorAll(".marquee3k__copy span").forEach(function(item){
-             item.innerHTML = "银行卡银行卡银行卡银行卡银行卡银行卡银行卡银行卡"
+             item.innerHTML = i+"银行卡"+i+"银行卡"+i+"银行卡"+i+"银行卡"+i+"银行卡"+i+"银行卡银行卡银行卡"
           });
          // Marquee3k.refreshMarquee("dafdfasdf");
           // Marquee3k.init()
