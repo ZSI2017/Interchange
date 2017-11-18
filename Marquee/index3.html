@@ -25,12 +25,9 @@
      Marquee3k.init()
      var i = 0;
      setInterval(()=>{
-       i++;
-       document.querySelectorAll(".marquee3k__copy span").forEach(function(item){
-             item.innerHTML = i+"银行卡";
-          });
-       Marquee3k.refreshAll();
-     },1000)
+           i++
+           Marquee3k.refreshWarp(i+"ttest"+i)
+     },10000)
 </script>
 
 </body>

@@ -108,24 +108,19 @@
         }
       }
     }
-    // static refreshMarquee(newContent){
-    //    // window.cancelAnimationFrame(window.stop);
-    //    for (let i = 0; i < MARQUEES.length; i++) {
-    //      var _this = MARQUEES[i]
-    //        _this.content.innerHTML = newContent;
-    //        _this.wrapper.innerHTML = "";
-    //        _this._setupWrapper();
-    //        _this._setupContent();
-    //        _this._setupEvents();
-    //
-    //        _this.wrapper.appendChild(_this.content);
-    //        _this.element.appendChild(_this.wrapper);
-    //
-    //    }
-    //
-    //
-    //
-    // }
+
+    static refreshWarp(newContent){
+       window.cancelAnimationFrame(window.stop);
+       for (let i = 0; i < MARQUEES.length; i++) {
+           let _this = MARQUEES[i];
+           let previousContent = _this.content.innerHTML;
+            _this.content.innerHTML = previousContent.replace(/>.+<\//g,">"+newContent+"</")
+            console.log(_this.content);
+            _this.element.innerHTML = ""
+            _this.element.appendChild(_this.content)
+       }
+       Marquee3k.init();
+    }
     static refresh(index) {
       MARQUEES[index]._refresh();
     }
@@ -146,7 +141,6 @@
         const instance = new Marquee3k(marquee, options);
         MARQUEES.push(instance);
       }
-      console.log(this.wrapper);
       animate();
 
       function animate() {
