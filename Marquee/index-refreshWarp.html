@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
   <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.0/rem/antui.css" />
   <link rel="stylesheet" href="https://as.alipayobjects.com/g/h5-lib/antui/9.9.0-2/rem/??widget/popmenu.css,widget/bubble.css,widget/notice.css,widget/inform.css,widget/dialog.css" />
-  <script src="./Marquee3k.js"></script>
+  <script src="./marquee3k.min.js"></script>
 </head>
 
 <body>
@@ -24,10 +24,11 @@
 <script>
      Marquee3k.init()
      var i = 0;
+     var content = "test";
      setInterval(()=>{
-           i++
-           Marquee3k.refreshWarp(i+"ttest"+i)
-     },10000)
+           content +="test";
+           Marquee3k.refreshWarp(content)
+     },1000)
 </script>
 
 </body>

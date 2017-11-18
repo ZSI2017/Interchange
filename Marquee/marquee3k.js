@@ -12,7 +12,7 @@
   } else {
     root.Marquee3k = factory();
   }
-}(this, function() {
+}(typeof window !== "undefined" ? window : this, function() {
   'use strict';
 
   class Marquee3k {
@@ -109,6 +109,11 @@
       }
     }
 
+    /**
+     * 重置公共内容的方法
+     * @param  {String} newContent 新的公共内容
+     * @return {null}             返回空
+     */
     static refreshWarp(newContent){
        window.cancelAnimationFrame(window.stop);
        for (let i = 0; i < MARQUEES.length; i++) {
@@ -133,7 +138,7 @@
 
     static init(options = { selector: 'marquee3k' }) {
       window.MARQUEES = [];
-      const marquees = Array.from(document.querySelectorAll(`.${options.selector}`));
+      const marquees = document.querySelectorAll(`.${options.selector}`);
       let previousWidth = window.innerWidth;
       let timer;
       for (let i = 0; i < marquees.length; i++) {
