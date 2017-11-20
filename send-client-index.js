@@ -402,13 +402,23 @@ Zepto(function ($) {
         }, function (result) {
             var sessionResult = result.data[internalCacheName];
             if(getSessionName.toLowerCase().indexOf("promotion") === -1 ){
-               getIndexNotice(sessionResult, cityCode, getSessionName, internalPageId,spmId);
+              calculate(getIndexNotice,sessionResult, cityCode, getSessionName, internalPageId,spmId)
+               // getIndexNotice(sessionResult, cityCode, getSessionName, internalPageId,spmId);
             }else {
-               getPromotion(sessionResult, cityCode, getSessionName, internalPageId,spmId);
+              calculate(getPromotion,sessionResult, cityCode, getSessionName, internalPageId,spmId)
+               // getPromotion(sessionResult, cityCode, getSessionName, internalPageId,spmId);
             }
         })
     }
-
+    /**
+     *  传入不同函数进行执行不同逻辑
+     *  @method calculate
+     *  @param  {Function} fn  即将执行的函数
+     *  @return {null}
+     */
+    function calculate(fn){
+        return fn.apply(this,Array.prototype.slice.call(arguments, 1));
+      }
     /**
      *  判断是否使用缓存数据还是请求接口数据获取运营位
      *  @method getPromotion
