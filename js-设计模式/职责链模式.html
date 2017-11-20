@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>职责链模式</title>
+  </head>
+  <body>
+     <script>
+         var NO_TOPIC = -1;
+         var Topic;
+         function Handler(s,t) {
+             this.successor = s||null;
+             this.topic = t||0;
+         }
+         Handler.prototype = {
+             handle:function(){
+                 if(this.successor) {
+                     this.successor.handle();
+                 }
+             },
+              has:function(){
+                  return this.topic != NO_TOPIC;
+              }
+         }
+
+         var app = new Handler({
+              handle:function(){
+                   console.log("app handle");
+               }
+         },3);
+         var dialog = new Handler(app,1);
+         // 如果 dialog 实例对象上存在，就会覆盖原型上的 handle 方法
+         // 也就不会继续向上执行handle 方法了
+         // 直接在这里阻断了。
+         dialog.handle = function() {
+            console.log("dialog before ....");
+             // 如果这里再次主动调用了原型上的hande(),就会继续向上执行
+            Handler.prototype.handle.call(this);
+             // 这里做具体的操作
+            console.log("dialog after ....");
+         }
+         var button = new Handler(dialog,2)
+         button.handle();
+     </script>
+  </body>
+</html>
