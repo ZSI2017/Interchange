@@ -1,0 +1,5 @@
+- 记录各种业务代码需求：
+  - Marquee-跑马灯效果
+  - pullToRefresh - 下拉刷新
+  - script-vue - 多页面传统应用中 引入vue
+  - mock      - 10px 边框问题
