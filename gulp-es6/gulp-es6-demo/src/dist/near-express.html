@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>附近快递网点</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="format-detection" content="email=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+  <link rel="stylesheet" href="https://as.alipayobjects.com/g/h5-lib/antui/9.9.0-2/rem/antui.css"/>
+  <link rel="stylesheet" href="https://as.alipayobjects.com/g/h5-lib/antui/9.9.0-2/rem/??widget/message.css,icon/message.css,widget/search.css,widget/page-result.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<style type="text/css">
+  .am-list:not([am-version]).twoline .am-list-item{
+  	padding-top: .095rem;
+  	padding-bottom: .13rem;
+  }
+  .am-search:not([am-version]){
+  	background-color: #efeff4;
+  }
+  .near_eplist div span {
+    padding-left: .0rem;
+	}
+</style>
+<body ontouchstart="">
+  <div  class="express_content">
+    <div class="am-input-autoclear am-flexbox" style="padding-left: 0.16rem;padding-top:0.08rem;padding-bottom:0.08rem;padding-right:.15rem;height: 0.29rem;">
+      <p class="location" style="display: none;float: left;">
+        <span id="cityTitle" style="color:#108ee9;font-size:.15rem;line-height:.16rem;">上海
+        </span>
+        <img style="width:.1rem;margin:0 .15rem 0 .06rem; height:.06rem;" src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/down_icon.png">
+      </p>
+      
+      <div class="am-search-input search-start am-flexbox-item" style="border-radius: .03rem;height: 0.28rem;display: inline-block;background: #fff;text-align: left;padding-left: .12rem;float: left;margin: 0;">
+        <!-- <div class="am-search-icon" style="text-align: left;padding-left: .12rem;position: relative;"> -->
+         <!--  <i class="am-icon search" style="margin-right: .05rem;vertical-align: middle;position: absolute;left: 0;top: 0;"></i> -->
+          <!-- <span class="am-search-ph location_input" style="font-size: .15rem; vertical-align: middle;">正在定位中...</span> -->
+          <div class="am-search-icon" aria-hidden="true" style="display: inline-block;float: left;height: .28rem;padding-right: .05rem;"><i class="am-icon search search-inpage" style="vertical-align: middle;"></i></div>
+          <input class="am-search-value nearsearch_input" id="input_id" type="text" placeholder="请输入详细地址" value="" style="width:70%;height: 0.28rem;line-height: 0.14rem;font-size: .13rem;border: none;">
+          <div class="am-search-clear" style="float: right;margin-right:.12rem;height: .28rem;text-align: center;"><i class="am-icon-clear am-icon clear-tiny" aria-hidden="true" style="margin-top: 0.06rem;"></i></div>
+        <!-- </div> -->
+       <!--  <input class="am-search-value nearsearch_input" id="input_id" type="text" placeholder="请输入详细地址" value="" style="height: 0.28rem;line-height: 0.14rem;font-size: .13rem;"> -->
+      </div>
+      <a type="button" class="am-search-button locationbtn" style="display: inline-block;width: .31rem;font-size:.15rem;float: right;height: .28rem;line-height: .28rem;margin-left: .16rem;">定位</a>
+      <a type="button" class="am-search-button cancel_button" style="display: none;width: .31rem;font-size:.15rem;float: right;height: .28rem;line-height: .28rem;margin-left: .16rem;">取消</a>
+      
+    </div>
+    <div class="am-page-result locationcontent" role="alert">
+  	  <div class="am-page-result-wrap" style="margin-top: .55rem;">
+  	    <div class="am-page-result-pic near_expic" aria-hidden="true">
+  	    	<img src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/locationlogo.png" style="width:1.35rem; height:1.35rem;">
+  	    </div>
+  	    <div class="am-ft-gray am-ft-md nolocation" style="padding-top: 21px;width: 65%;margin: auto;line-height: .20rem;">定位中...</div>
+  	  </div>
+  	</div>
+    <div class="am-list twoline near_expresscontent" style="padding-top: 0;">
+
+    </div>
+  </div>
+  <script src="https://as.alipayobjects.com/g/component/antbridge/1.1.1/antbridge.min.js"></script>
+  <script src="https://as.alipayobjects.com/g/h5-lib/antui/9.9.0-2/rem/antui.js"></script>
+  <script src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&plugin=AMap.DistrictSearch&key=07caa91405da1b10ffca8c4b12dd4321"></script>
+
+  <script type="text/javascript" src="https://os.alipayobjects.com/rmsportal/VVdXVYPWSSKQQYL.js"></script>
+  <script src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/js/area.js"></script>
+   <script type="text/javascript" src="../libs/common.js"></script>
+  <script type="text/javascript" src="../js/nearExpress.js">
+  </script>
+</body>
+</html>

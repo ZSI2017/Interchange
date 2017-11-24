@@ -1,0 +1,18 @@
+.twoline .am-list-body .am-list-item:first-child {
+  padding: 0.105rem 0.16rem 0.12rem 0.16rem !important;
+  background-size: 0 0, .16rem 1px, 100% 1px, calc(100% - 0.16rem) 1px !important;
+}
+
+/* 底部按钮样式  */
+
+.manage-button {
+  height: .47rem;
+  line-height: .47rem;
+}
+
+.button-box-class {
+  padding: 0.1rem 0.16rem;
+  padding-top: .105rem;
+}
+
+/* 底部按钮样式  */

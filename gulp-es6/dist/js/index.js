@@ -1,0 +1,1 @@
+"use strict";var a="123432",b="2323",c=function(){},name="守候",sex="男",info={name:name,sex:sex};console.log(info);var sum=function(n,e){return n+e};

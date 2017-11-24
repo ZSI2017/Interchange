@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>寄收件地址</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="format-detection" content="email=no"/>
+	<meta name="data-bizType" content="express"/>
+	<meta name="data-aspm" content="a106"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/antui.css"/>
+<link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/??widget/message.css,widget/notice.css,widget/page-result.css"/>
+  <!-- <link rel="stylesheet" type="text/css" href="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/css/iosSelect.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/iosSelect2.css"> -->
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+</head>
+<body ontouchstart="" style="display:none" data-aspm="b2100">
+  <div class="express_content">
+    <div class="am-list twoline" style="padding: 0.105rem 0 0.11rem;">
+	  <div class="am-list-body">
+	    <div class="am-list-item sendAddress sendAddress-btn" style="height:91px;padding: 0 0.15rem;">
+						<div class="sendClick am-list-thumb" style="margin-right: .1rem;"><img src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/ji_icon.png" style="width:0.24rem;height:0.24rem;" /></div>
+						<div class="sendClick am-list-content address_listwhere" data-spmv="a106.b2100.c4586.d7091">
+							<label class="address_where send_where" style="color:#888;display:block">从哪里寄</label>
+							<div class="am-list-title sendTitle" style="font-size:.15rem;color:#888;display:none"><span class="sender-name"></span><span style="padding-left:.135rem;" class="sender-number"></span></div>
+							<div class="address_describe senddesc" style="display:none" data-id="" data-provinceNo="" data-cityNo="" data-areaNo=""></div>
+						</div>
+				<div class="sendaddressClick am-list-right-content express_address_book hairline-left" data-spmv="a106.b2100.c4586.d7092">
+					 <span class="am-ft-blue " style="font-size: .15rem;">地址簿</span>
+				</div>
+			</div>
+			<div class="am-list-item recpAddress recpAddress-btn" style="height:91px;padding: 0 0.15rem;">
+				<div class="recpClick am-list-thumb" data-spmv="a106.b2100.c4586.d7093" style="margin-right: .1rem;"><img src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/shou_icon.png" style="width:0.24rem;height:0.24rem;" /></div>
+				<div class="recpClick am-list-content  address_listwhere" data-spmv="a106.b2100.c4586.d7093">
+					<label class="address_where recp_where" style="color:#888;display:block">寄到哪里</label>
+					<div class="am-list-title recTitle" style="font-size:.15rem;color:#888;display:none"><span class="recp-name"></span><span style="padding-left:.135rem;" class="recp-number"></span></div>
+					<div class="address_describe recdesc" style="display:none" data-recid="" data-recprovinceNo="" data-reccityNo="" data-recareaNo=""></div>
+				</div>
+				<div class="recpaddressClick am-list-right-content express_address_book hairline-left" data-spmv="a106.b2100.c4586.d7094">
+					 <span class="am-ft-blue" style="font-size: .15rem;">地址簿</span>
+				</div>
+			</div>
+      </div>
+    </div>
+<!-- <div class="am-list twoline" style="margin-top:-0.15rem;padding-bottom:0">
+	<div class="am-list-item wpWeight" data-spmv="a106.b2109.c4629.d7166" style="padding-bottom:.07rem;padding-top: .07rem;min-height: 0.315rem;display:none">
+			<div class="am-list-thumb" style="margin-right: .15rem;"><img src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/weight_icon.png" alt="" style="width:.21rem;height:.21rem;"></div>
+		<div class="am-list-content"><span class="am-ft-md am-ft-red" style="padding-right:.05rem;">*</span>物品重量</div>
+				<input type="hidden" name="weight_id" id="weightId" value="">
+			<div class="am-ft-gray" id="goodsweight" style="font-size:.15rem;">0.5公斤及以下</div>
+			 <input type="hidden" class="goodsweightNum" value="1" />
+			<div class="am-list-arrow" style="margin-left: .1rem;padding-top:0;padding-bottom:0;height:auto;"><span class="am-icon horizontal" style="height:auto;"><img src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/indicator_icon.png" /></span></div>
+		</div>
+		<div class="am-list-item" id="selectTime" data-spmv="a106.b2109.c4629.d7164" style="padding-bottom:.07rem; padding-top: .07rem;">
+			<div class="am-list-thumb" style="margin-right: .15rem;"><img src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/time_icon.png " alt="" style="width:.21rem;height:.21rem;"></div>
+			<div class="am-list-content"><span class="am-ft-md am-ft-red" style="padding-right:.05rem;">*</span>期望上门时间</div>
+			<div class="am-ft-gray" id="timeDate" style="font-size:.15rem;"> </div>
+				<input type="hidden" class="day1" value="" />
+				<input type="hidden" class="time1" value="" />
+				<input type="hidden" name ="date_id" id="dateId" value="">
+				<input type="hidden" name="time_id" id="timeId" value="">
+			<div class="am-list-arrow" style="margin-left: .1rem;padding-top:0;padding-bottom:0;height:auto;">
+					<span class="am-icon horizontal" style="height:auto;">
+							<img src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/img/indicator_icon.png"/>
+					</span>
+			</div>
+		</div>
+
+	</div> -->
+	<!-- <span id="weightTip" style="font-size:.14rem;color:#ff5b05;padding-left:.15rem;margin-top:-.2rem;display:none">可根据重量精准预估运费</span> -->
+	<div>
+    <div class="complete_btn">
+      <button type="button" class="am-button disabled"  id="btn-address-submit" data-spmv="a106.b2100.c4586.d7095" style="border-radius: .05rem;">下一步</button>
+    </div>
+  </div>
+</body>
+<script src="https://as.alipayobjects.com/g/component/antbridge/1.1.1/antbridge.min.js"></script>
+<script src="https://a.alipayobjects.com/static/fastclick/1.0.6/fastclick.min.js"></script>
+<script type="text/javascript" src="https://os.alipayobjects.com/rmsportal/VVdXVYPWSSKQQYL.js"></script>
+<!-- <script src="https://as.alipayobjects.com/g/h5-lib/antui/9.9.0-2/rem/antui.js"></script> -->
+<script src="https://a.alipayobjects.com/g/antui/antui/10.0.12/antui.js"></script>
+<script type="text/javascript" async="async" src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/js/area0525.js"> </script>
+<!-- <script type="text/javascript" src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/js/iosselect06-05.js"></script> -->
+<script src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
+<!-- <script src="https://expressprod.oss-cn-hangzhou.aliyuncs.com/mobile/js/area.js"></script> -->
+<script type="text/javascript" src="../libs/config.js"></script>
+<script type="text/javascript" src="../libs/common.js"></script>
+<script type="text/javascript" src="../js/addressInformationPlaceOrder.js"></script>
+</html>
