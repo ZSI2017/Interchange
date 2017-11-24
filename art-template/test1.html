@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>art-template</title>
+    <!-- <script type="text/plain" src="https://raw.githubusercontent.com/aui/art-template/master/lib/template-web.js"></script> -->
+     <script src="./template-web.js"></script>
+  </head>
+  <body>
+  <script id="test" type="text/html">
+      <h1>{{title}}</h1>
+      <ul>
+          {{each list value i}}
+              <li  detailAddress={{value.address}}  detailAddress={{value.address}}   detailAddress={{value.address}} >索引 {{i + 1}} ：{{value.address}}</li>
+          {{/each}}
+      </ul>
+  </script>
+  <div id="content">
+  </div>
+   <script type="text/javascript">
+       var data = {
+            title:"标签",
+            list:[{address:'dddddddddddd（李琪 123445556 收）'},{address: '博客'},{address:'摄影'},{address: '电影'},{address:'民谣'}, '旅行', '吉他']
+        };
+       var html = template('test',data);
+       document.getElementById("content").innerHTML = html;
+   </script>
+  </body>
+</html>
