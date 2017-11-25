@@ -172,27 +172,30 @@ gulp.task('packjs', function() {
        presets:['es2015']
     }))
     .pipe(named())
-    .pipe(webpack({
-      output: {
-        filename: '[name].js'
-      },
-      module: {
-        loaders: [{
-          test: /\.js$/,
-          loader: 'imports?define=>false',
-          exclude: './src/libs/*'
-        }, {
-          test: /\.string$/,
-          loader: 'string'
-        }]
-      }
-    }))
+    // .pipe(webpack({
+    //   output: {
+    //     filename: '[name].js'
+    //   },
+    //   module: {
+    //     loaders: [
+    //       {
+    //         test: /\.js$/,
+    //         loader: 'babel',
+    //         query:{
+    //              presets:["es2015"]
+    //         },
+    //         exclude: './src/libs/*'
+    //       },{
+    //       test: /\.string$/,
+    //       loader: 'string'
+    //     }]
+    //   }
+    // }))
     .pipe(uglify().on('error', function(err) {
       console.log('\x07', err.lineNumber, err.message);
       return this.end();
     }))
 
-//    .pipe(rev())
     .pipe(gulp.dest('./dist/js/'))
 //    .pipe(rev.manifest())
 //  .pipe(gulp.dest('./dist/rev/js'));

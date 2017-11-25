@@ -1,6 +1,8 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
+var named = require('vinyl-named');
+var webpack = require('gulp-webpack');
 // const rename = require('gulp-rename');
 // const cssnano = require('gulp-cssnano');
 // const concat = require('gulp-concat');
@@ -9,11 +11,31 @@ const uglify = require('gulp-uglify');
 
 // 编译并压缩js
 gulp.task('convertJS', function(){
-  return gulp.src('app/js/*.js')
+   return gulp.src('app/js/*.js')
     .pipe(babel({
       presets: ['es2015']
     }))
-    .pipe(uglify())
+    // .pipe(named())
+    // .pipe(webpack({
+    //   output: {
+    //     filename: '[name].js'
+    //   },
+    //   module: {
+    //     loaders: [{
+    //       test: /\.js$/,
+    //       loader: 'imports?define=>false',
+    //       exclude: './src/libs/*'
+    //     }, {
+    //       test: /\.string$/,
+    //       loader: 'string'
+    //     }]
+    //   }
+    // }))d
+    .pipe(uglify().on('error', function(err) {
+      console.log('\x07', err.lineNumber, err.message);
+      return this.end();
+    }))
+    // .pipe(uglify())
     .pipe(gulp.dest('dist/js'))
 })
 
