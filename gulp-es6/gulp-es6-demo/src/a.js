@@ -1,2 +1,2 @@
 let sex = "boy";
-export default sex;
+let  obj = {sex};
