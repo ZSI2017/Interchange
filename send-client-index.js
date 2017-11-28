@@ -377,8 +377,8 @@ Zepto(function ($) {
                     $(".exprComsTitle").hide();
                 }
                 //运营图片 和 公告 缓存加载
-               getPromotionOrNoticeCache("indexPromotion",cityCode, pageId,"61m,320,323") {
-               getPromotionOrNoticeCache("indexNotice",cityCode, pageId,"61m,320,323") {
+               getPromotionOrNoticeCache("indexPromotion",cityCode, pageId,"61m,320,323");
+               getPromotionOrNoticeCache("indexNotice",cityCode, pageId,"61m,320,323");
             }
             setTimeout(function () {
                 notPaidOrder(data.result.notPaidOrderNo, data.result.notPaidRemindCnt);
