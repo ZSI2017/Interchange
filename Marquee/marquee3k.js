@@ -115,15 +115,17 @@
      * @return {null}             返回空
      */
     static refreshWarp(newContent){
-       window.cancelAnimationFrame(window.stop);
-       for (let i = 0; i < MARQUEES.length; i++) {
-           let _this = MARQUEES[i];
-           let previousContent = _this.content.innerHTML;
-            _this.content.innerHTML = previousContent.replace(/>.+<\//g,">"+newContent+"</")
-            console.log(_this.content);
-            _this.element.innerHTML = ""
-            _this.element.appendChild(_this.content)
-       }
+      if(typeof MARQUEES !== "undefined" ){
+        window.cancelAnimationFrame(window.stop);
+        for (let i = 0; i < MARQUEES.length; i++) {
+            let _this = MARQUEES[i];
+            let previousContent = _this.content.innerHTML;
+             _this.content.innerHTML = previousContent.replace(/>.+<\//g,">"+newContent+"</")
+             console.log(_this.content);
+             _this.element.innerHTML = ""
+             _this.element.appendChild(_this.content)
+        }
+      }
        Marquee3k.init();
     }
     static refresh(index) {
