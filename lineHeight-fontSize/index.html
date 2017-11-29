@@ -3,11 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>vertical-align</title>
+    <style>
+      img {
+        /*display: block*/
+      }
+      .box-content {
+        line-height: 240px;
+        font-size:0;
+      }
+      .box-content img {
+         vertical-align: middle;
+      }
+    </style>
   </head>
   <body>
      <a href="http://www.zhangxinxu.com/wordpress/2015/08/css-deep-understand-vertical-align-and-line-height/">
            understand -vertical-align-and-line-height;
      </a>
+
+     <div class="box-content" style="background-color:#999">
+        <img src="http://image.zhangxinxu.com/image/study/s/s256/mm1.jpg" alt="1234">
+        <span style="background-color:#fff;display:inline-block">zxx</span>
+     </div>
 
   </body>
 </html>
