@@ -14,6 +14,13 @@
       .box-content img {
          vertical-align: middle;
       }
+      .dib-baseline {
+        display: inline-block;
+        width:150px;
+        height:150px;
+        border:1px solid #cad5eb;
+        background-color:#f0f3f9;
+      }
     </style>
   </head>
   <body>
@@ -25,6 +32,19 @@
         <img src="http://image.zhangxinxu.com/image/study/s/s256/mm1.jpg" alt="1234">
         <span style="background-color:#fff;display:inline-block">zxx</span>
      </div>
+   <br/>
+
+     <h3>
+        inline-block  和 baseline
+     </h3>
+     <pre>
+       一个inline-block 元素，如果里面没有inline内联元素，或者overflow 不是visble
+       则该元素的基线就是其margin 底边缘，
+       否则，其基线就是元素里面最后一行内联元素的基线。
+     </pre>
+      <p> 如果设置</p>
+     <span class="dib-baseline"></span>
+     <span class="dib-baseline" style="line-height:0">hhhhhhhdsdf阿斯顿发</span>
 
   </body>
 </html>
