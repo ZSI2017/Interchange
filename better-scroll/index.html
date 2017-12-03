@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="data-bizType" content="express" />
+    <meta name="data-aspm" content="a106" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <title> better-scroll study</title>
+    <script type="text/javascript" src="./libs/bscroll.js"> </script>
+    <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/antui.css" />
+    <link rel="stylesheet" href="https://a.alipayobjects.com/g/antui/antui/10.0.12/rem/widget/notice.css" />
+    <script type="text/javascript" src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
+    <style>
+    html,body,.wrapper{
+      height:100%;
+      width:100%;
+    }
+     .content li{
+        box-sizing: border-box;
+        width:100%;
+        height:200px;
+        border:1px solid black;
+        background-color:#108eef;
+     }
+
+     .list-wrapper {
+       position: absolute;
+       top:0;
+       left:0;
+       right:0;
+       bottom:0;
+       overflow: hidden
+     }
+
+    </style>
+  </head>
+  <body>
+<div class="list-wrapper">
+    <div class="wrapper">
+
+      <ul class="content">
+        <li>1 - better-scroll</li>
+        <li>2 - better-scroll</li>
+        <li>3 - better-scroll</li>
+        <li>4 - better-scroll</li>
+        <li>5 - better-scroll</li>
+        <li>6 - better-scroll</li>
+        <li>7 - better-scroll</li>
+        <li>8 - better-scroll</li>
+      </ul>
+    </div>
+    <p class="pulldown-warp" style="position:absolute;top:-30px;left:0;right:0;text-align:center">刷新中。。。</p>
+  </div>
+
+
+
+      <script>
+  var scroll = new BScroll('.wrapper',{
+    scrollY: true,
+    click: true,
+    tap:true,
+    bounce:true,
+    bounceTime:700,
+    isAnimating:true,
+    useTransition:true,
+    scrollbar:true,
+    pullDownRefresh:true,
+    threshold:100
+  });
+  $('.content li').click(function(e){
+    console.log(e);
+  });
+  var toggle = true;
+  scroll.on("pullingDown",function(e){
+    console.log("isPullingDown");
+    toggle = false;
+      $(".pulldown-warp").html("刷新中。。。。")
+    setTimeout(function(){
+      // scroll.scrollTo(0,0)
+toggle = true;
+      scroll.finishPullDown();
+    },1000)
+  })
+
+  scroll.on('scroll',function(pos){
+    if(toggle){
+      $(".pulldown-warp").html("下拉刷新！")
+
+    }
+    var bubbleY = pos.y;
+    console.log(bubbleY);
+    $(".pulldown-warp").css("top",bubbleY-30)
+  })
+  console.log(scroll);
+  </script>
+  </body>
+</html>
