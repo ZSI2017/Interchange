@@ -36,4 +36,5 @@ Zepto(function ($) {
          console.log(value);
        })
        $.axs();
+       commonFun();
 });
