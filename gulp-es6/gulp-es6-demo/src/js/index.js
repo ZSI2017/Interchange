@@ -35,5 +35,5 @@ Zepto(function ($) {
        timeout(3000).then((value) => {
          console.log(value);
        })
-
+       $.axs();
 });
