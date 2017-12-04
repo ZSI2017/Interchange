@@ -1,14 +1,19 @@
+.manage_receiver {
+  /*background-color: blue;*/
+}
 .content-select {
+  border: 1px solid transparent;
+  /*display:table-cell;*/
   background-color: #f7fcff;
   text-align: center;
+  vertical-align: middle;
   font-size: .14rem;
   color: #108EE9;
-  display: inline-block;
   width: .51rem;
   height: .25rem;
-  line-height: 1;
-  padding-top: 0.055rem;
-  padding-bottom: 0.055rem;
+  line-height: .27rem;
+  /*padding-top:  0.055rem;*/
+  /*padding-bottom: 0.055rem;*/
   box-sizing: border-box;
   /*line-height: .25rem;*/
   display: inline-block;
