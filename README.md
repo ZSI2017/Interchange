@@ -14,5 +14,6 @@
   - ### [browserify - js 打包工具](./browserify/)
   - ### [tab -  实现不同的tab标签页切换-antUI tab 切换](./tab-iframe/)
   - ### [css-高级技巧](./css-高级技巧/)
-  - ### [适用于移动端的picker级联选择器](./iosSelect/) -- [原始库](https://github.com/zhoushengmufc/iosselect)
-  - ### [适用于移动端的iScroll升级版](./better-scroll/) -- [原始库-滴滴大神](https://github.com/ustbhuangyi/better-scroll)
+  - ### [适用于移动端的picker级联选择器](./iosSelect/) ----> [原始库](https://github.com/zhoushengmufc/iosselect)
+  - ### [适用于移动端的iScroll升级版](./better-scroll/) ----> [原始库-滴滴](https://github.com/ustbhuangyi/better-scroll)
+  - ### [代码规范](./代码规范/README.md)
