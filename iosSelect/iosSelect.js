@@ -1602,27 +1602,11 @@
 			tmpHtml += this.getWhiteItem();
 			var renderMap = this.mapRenderByIndex(index);
 			renderMap.levelUlContainDom.innerHTML = tmpHtml;
-			// alert(renderMap.levelUlContainDom.querySelectorAll("li").forEach);
-			// alert(renderMap.levelUlContainDom.querySelectorAll("li").length )
-			// var internalDom = renderMap.levelUlContainDom.querySelectorAll("li")
-			// var internalLength = renderMap.levelUlContainDom.querySelectorAll("li").length;
-			// for(var index = 0;index<internalLength;index++) {
-			// 	 (function(index){
-			// 		 internalDom[index].addEventListener("click",function(e){
-			// 			 alert(index);
-			// 							if(e.srcElement.innerText !== ""){
-			// 							 renderMap.scrollInstance.scrollTo(0,(index-3)*35*(-1),600)
-			// 						 }
-			// 							 console.log(e);
-			// 		 })
-			// 	 })(index)
-			// }
-			renderMap.levelUlContainDom.querySelectorAll("li").forEach(function(item,index){
+		[].forEach.call(renderMap.levelUlContainDom.querySelectorAll("li"),function(item,index){
 				item.addEventListener("click",function(e){
                 if(e.srcElement.innerText !== ""){
 									renderMap.scrollInstance.scrollTo(0,(index-3)*35*(-1),600)
 								}
-									console.log(e);
 				})
 			})
 			// renderMap.levelUlContainDom.querySelector("li")
