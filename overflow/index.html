@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>灵活的overflow</title>
+    <style>
+       .overflower {
+         line-height:1.5em;
+         display: inline-block;
+         overflow: hidden;
+
+         box-sizing: border-box;
+         max-width:100%;
+         height:1.5em;
+
+         white-space: nowrap;
+         text-overflow: ellipsis;
+       }
+
+       .overflower-long {
+         display:inline;
+       }
+
+       .overflower-short {
+         display:none
+       }
+       @supports (flex-wrap:wrap) {
+         .overflower{
+           display: inline-flex;
+           flex-wrap:wrap;
+         }
+         .overflower-short{
+           display: block;
+           overflow:hidden;
+
+           width:0;
+           text-overflow: ellipsis;
+
+           flex-grow: 1;
+         }
+         .overflower-long {
+           flex-basis: 100%;
+         }
+       }
+    </style>
+  </head>
+  <body>
+    <span class="overflower">
+      <!-- 放置短文本的容器  -->
+      <span class="overflower-short" aria-hiidden="true" title="Some long text that could become shorter">
+        <span class="overflower">
+          <span class="overflower-short">
+            <span class="overflower">
+              <span class="overflower-short">become shorte</span>
+              <span class="overflower-long">Some</span>
+            </span>
+          </span>
+          <span class="overflower-long">Some middle text that could become Some middle text that could become </span>
+        </span>
+      </span>
+      <!-- 放置长文本的容器  -->
+      <span class="overflower-long"> Some long text that could become shorter Some long text that could become shorter Some long text that could become shorter</span>
+    </span>
+
+  </body>
+</html>
