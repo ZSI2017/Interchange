@@ -1098,12 +1098,11 @@
 			var sureDom = this.el.querySelectorAll('.sure');
 			var closeDom = this.el.querySelectorAll('.close');
 			var self = this;
-			this.el.addEventListener('touchstart', function(e) {
-				alert("dfasdfasdf")
+			this.el.addEventListener('click', function(e) {
 				self.close();
 				self.opts.fallback && self.opts.fallback();
 			});
-			this.layer_el.addEventListener('touchstart', function(e) {
+			this.layer_el.addEventListener('click', function(e) {
 				e.stopPropagation();
 			});
 			Array.prototype.slice.call(sureDom).forEach(function (item, index) {
