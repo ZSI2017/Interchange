@@ -57,11 +57,11 @@
         <li>8 - better-scroll</li>
       </ul>
     </div>
-<div id="mesage1" style="font-size:16px;text-align:center;line-height:1;position:absolute;top:-30px;left:0;right:0;text-align:center">
-  <canvas id="cvs"  width="150" height="200"  style="width: 150px; height: 200px;"></canvas>
-  <!-- <div class="am-loading" aria-label="加载中" style="padding-top:0.04rem;padding-bottom:0">
+<div id="mesage1" style="height:80px;font-size:16px;text-align:center;line-height:1;position:absolute;top:-80px;left:0;right:0;text-align:center">
+  <canvas id="cvs"  width="50" height="80"  style="width: 50px; height: 80px;"></canvas>
+  <div class="am-loading" aria-label="加载中" style="padding-top:0.04rem;padding-bottom:0;display:none">
        <i class="am-icon loading" aria-hidden="true"></i>
-  </div> -->
+  </div>
    <!-- <p style="color:#d2d2d2">正在刷新...</p> -->
 </div>
     <!-- <p class="pulldown-warp" style="">刷新中。。。</p> -->
@@ -90,7 +90,12 @@
     console.log("isPullingDown");
     toggle = false;
       $(".pulldown-warp").html("刷新中。。。。")
+      $("#cvs").hide();
+      $(".am-loading").show();
+
     setTimeout(function(){
+      $("#cvs").show();
+      $(".am-loading").hide();
       // scroll.scrollTo(0,0)
      toggle = true;
       scroll.finishPullDown();
@@ -132,9 +137,11 @@
 
       function _draw() {
         var bubble = document.getElementById("cvs");
+        bubble.width = width;
+        bubble.height = height;
         var ctx = bubble.getContext('2d');
         ctx.clearRect(0, 0, bubble.width, bubble.height)
-
+        ctx.lineWidth = 1;
         _drawBubble(ctx);
 
         _drawArrow(ctx)
@@ -147,12 +154,14 @@
 
         const rate = distance / maxDistance
         const headRadius = initRadius - (initRadius - minHeadRadius) * rate
-
+        // const headRadius = 24;
         headCenter.y = initCenterY - (initRadius - minHeadRadius) * rate
 
 
         // 画上半弧线
         ctx.arc(headCenter.x, headCenter.y, headRadius, 0, Math.PI, true);
+
+        console.log(headRadius);
 
         console.log("headCenter.x--"+headCenter.x +"  "+" headCenter.y: "+ headCenter.y );
 
@@ -189,7 +198,7 @@
         ctx.quadraticCurveTo(controlPointR.x, controlPointR.y, headPointR.x, headPointR.y)
 
         ctx.fillStyle = 'rgb(170,170,170)'
-        ctx.fill()
+        // ctx.fill()
         ctx.strokeStyle = 'rgb(153,153,153)'
         ctx.stroke()
         ctx.restore()
@@ -201,7 +210,7 @@
         const rate = distance / maxDistance
         const arrowRadius = initArrowRadius - (initArrowRadius - minArrowRadius) * rate
         // 画内圆
-        ctx.arc(headCenter.x, headCenter.y, (arrowRadius - (arrowWidth - rate))/2, -Math.PI / 2, 0, true)
+        ctx.arc(headCenter.x, headCenter.y, arrowRadius - (arrowWidth - rate), -Math.PI / 2, 0, true)
         // 画外圆
         ctx.arc(headCenter.x, headCenter.y, arrowRadius, 0, Math.PI * 3 / 2, false)
         ctx.lineTo(headCenter.x, headCenter.y - arrowRadius - arrowWidth / 2 + rate)
