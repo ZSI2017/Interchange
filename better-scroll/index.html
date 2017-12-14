@@ -57,7 +57,7 @@
         <li>8 - better-scroll</li>
       </ul>
     </div>
-<div id="mesage1" style="height:80px;font-size:16px;text-align:center;line-height:1;position:absolute;top:-80px;left:0;right:0;text-align:center">
+<div id="mesage1" style="height:120px;font-size:16px;text-align:center;line-height:1;position:absolute;top:-80px;left:0;right:0;text-align:center">
   <canvas id="cvs"  width="50" height="80"  style="width: 50px; height: 80px;"></canvas>
   <div class="am-loading" aria-label="加载中" style="padding-top:0.04rem;padding-bottom:0;display:none">
        <i class="am-icon loading" aria-hidden="true"></i>
@@ -79,7 +79,7 @@
     isAnimating:true,
     useTransition:true,
     scrollbar:true,
-    pullDownRefresh:{	threshold:30,stop:30},
+    pullDownRefresh:{	threshold:30,stop:50},
     threshold:100
   });
   $('.content li').click(function(e){
@@ -87,7 +87,6 @@
   });
   var toggle = true;
   scroll.on("pullingDown",function(e){
-    console.log("isPullingDown");
     toggle = false;
       $(".pulldown-warp").html("刷新中。。。。")
       $("#cvs").hide();
@@ -106,13 +105,15 @@
     if(toggle){
       $(".pulldown-warp").html("下拉刷新！")
     }
-    var bubbleY = pos.y;
-    bubbleVue(bubbleY);
-    $(".pulldown-warp").css("top",bubbleY-30)
-    $("#mesage1").css("top",bubbleY-30)
+    var bubbleY = Math.max(0,pos.y-50);
+    bubbleVue(bubbleY,pos.y);
+    // if()
+
+    $(".pulldown-warp").css("top",Math.min(pos.y-50,10));
+    $("#mesage1").css("top",Math.min(pos.y-50,10));
   })
 
-  function bubbleVue(bubbleY) {
+  function bubbleVue(bubbleY,posY) {
       var y = bubbleY;
       var ratio = window.devicePixelRatio;
 
@@ -124,7 +125,7 @@
       var initArrowRadius = 10 * ratio;
       var minArrowRadius = 6 * ratio;
       var arrowWidth = 3 * ratio;
-      var maxDistance = 40 * ratio;
+      var maxDistance = 30 * ratio;
       var initCenterX = 25 * ratio;
       var initCenterY = 25 * ratio;
       var headCenter = {
@@ -153,17 +154,19 @@
         ctx.beginPath()
 
         const rate = distance / maxDistance
+        console.log(distance +"   "+maxDistance);
         const headRadius = initRadius - (initRadius - minHeadRadius) * rate
         // const headRadius = 24;
         headCenter.y = initCenterY - (initRadius - minHeadRadius) * rate
+        // console.log(initCenterY +" "+initRadius+" "+ " "+minHeadRadius+" "+rate);
 
 
         // 画上半弧线
         ctx.arc(headCenter.x, headCenter.y, headRadius, 0, Math.PI, true);
 
-        console.log(headRadius);
+        // console.log(headRadius);
 
-        console.log("headCenter.x--"+headCenter.x +"  "+" headCenter.y: "+ headCenter.y );
+        // console.log("headCenter.x--"+headCenter.x +"  "+" headCenter.y: "+ headCenter.y );
 
         // 画左侧贝塞尔
         const tailRadius = initRadius - (initRadius - minTailRadius) * rate
@@ -198,7 +201,7 @@
         ctx.quadraticCurveTo(controlPointR.x, controlPointR.y, headPointR.x, headPointR.y)
 
         ctx.fillStyle = 'rgb(170,170,170)'
-        // ctx.fill()
+        ctx.fill()
         ctx.strokeStyle = 'rgb(153,153,153)'
         ctx.stroke()
         ctx.restore()
@@ -230,7 +233,7 @@
 
 
 
-  console.log(scroll);
+  // console.log(scroll);
   </script>
   </body>
 </html>

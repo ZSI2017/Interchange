@@ -58,16 +58,18 @@
       _drawBubble(ctx) {
         ctx.save()
         ctx.beginPath()
-        // console.log(this.ratio)
         const rate = this.distance / this.maxDistance
+        // console.log(this.distance +"  "+this.maxDistance);
+        
         const headRadius = this.initRadius - (this.initRadius - this.minHeadRadius) * rate
 
         this.headCenter.y = this.initCenterY - (this.initRadius - this.minHeadRadius) * rate
-
+                      // 50 - (36 - 24)*2
+        console.log(this.headCenter.y);
         // 画上半弧线
         ctx.arc(this.headCenter.x, this.headCenter.y, headRadius, 0, Math.PI, true)
 
-        console.log(headRadius)
+        // console.log(this.initCenterY+" "+this.initRadius + " "+this.minHeadRadius+" "+rate)
 
         // 画左侧贝塞尔
         const tailRadius = this.initRadius - (this.initRadius - this.minTailRadius) * rate
@@ -133,7 +135,7 @@
       }
     },
     watch: {
-      y() {
+      y(newValue) {
         this._draw()
       }
     }
