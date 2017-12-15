@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="data-bizType" content="express">
+    <meta name="data-aspm" content="a106">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <title> better-scroll tudy</title>
+    <script type="text/javascript" src="/dist/dc913bec84f59606be80721e883b447c.js"> </script>
+    <link rel="stylesheet" href="https://gw.alipayobjects.com/as/g/antui/antui/10.1.8/rem/antui.css">
+    <link rel="stylesheet" href="https://gw.alipayobjects.com/as/g/antui/antui/10.1.8/rem/widget/loading.css">
+    <link rel="stylesheet" href="https://gw.alipayobjects.com/as/g/antui/antui/10.1.8/rem/base/media.css">
+    <script type="text/javascript" src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script>
+    <style>
+    html,body,.wrapper{
+      height:100%;
+      width:100%;
+    }
+     .content li{
+        box-sizing: border-box;
+        width:100%;
+        height:200px;
+        border:1px solid black;
+        background-color:grey;
+     }
+
+     .list-wrapper {
+       position: absolute;
+       top:0;
+       left:0;
+       right:0;
+       bottom:0;
+       overflow: hidden
+     }
+
+    </style>
+  </head>
+  <body>
+<div class="list-wrapper">
+    <div class="wrapper">
+
+      <ul class="content">
+        <li>1 - better-scroll</li>
+        <li>2 - better-scroll</li>
+        <li>3 - better-scroll</li>
+        <li>4 - better-scroll</li>
+        <li>5 - better-scroll</li>
+        <li>6 - better-scroll</li>
+        <li>7 - better-scroll</li>
+        <li>8 - better-scroll</li>
+      </ul>
+    </div>
+<div id="mesage1" style="height:120px;font-size:16px;text-align:center;line-height:1;position:absolute;top:-80px;left:0;right:0;text-align:center">
+  <canvas id="cvs" width="50" height="80" style="width: 50px; height: 80px;"></canvas>
+  <div class="am-loading" aria-label="加载中" style="padding-top:0.04rem;padding-bottom:0;display:none">
+       <i class="am-icon loading" aria-hidden="true"></i>
+  </div>
+   <!-- <p style="color:#d2d2d2">正在刷新...</p> -->
+</div>
+    <!-- <p class="pulldown-warp" style="">刷新中。。。</p> -->
+  </div>
+
+
+
+      <script>
+  var scroll = new BScroll('.wrapper',{
+    scrollY: true,
+    click: true,
+    tap:true,
+    bounce:true,
+    bounceTime:700,
+    isAnimating:true,
+    useTransition:true,
+    scrollbar:true,
+    pullDownRefresh:{	threshold:30,stop:50},
+    threshold:100
+  });
+  $('.content li').click(function(e){
+    console.log(e);
+  });
+  var toggle = true;
+  scroll.on("pullingDown",function(e){
+    toggle = false;
+      $(".pulldown-warp").html("刷新中。。。。")
+      $("#cvs").hide();
+      $(".am-loading").show();
+
+    setTimeout(function(){
+      $("#cvs").show();
+      $(".am-loading").hide();
+      // scroll.scrollTo(0,0)
+     toggle = true;
+      scroll.finishPullDown();
+    },1000)
+  })
+
+  scroll.on('scroll',function(pos){
+    if(toggle){
+      $(".pulldown-warp").html("下拉刷新！")
+    }
+    var bubbleY = Math.max(0,pos.y-50);
+    bubbleVue(bubbleY,pos.y);
+    // if()
+
+    $(".pulldown-warp").css("top",Math.min(pos.y-50,10));
+    $("#mesage1").css("top",Math.min(pos.y-50,10));
+  })
+
+  function bubbleVue(bubbleY,posY) {
+      var y = bubbleY;
+      var ratio = window.devicePixelRatio;
+
+      var width =  50 * ratio;
+      var height = 80 * ratio;
+      var initRadius = 18 * ratio;
+      var minHeadRadius = 12 * ratio;
+      var minTailRadius = 5 * ratio;
+      var initArrowRadius = 10 * ratio;
+      var minArrowRadius = 6 * ratio;
+      var arrowWidth = 3 * ratio;
+      var maxDistance = 30 * ratio;
+      var initCenterX = 25 * ratio;
+      var initCenterY = 25 * ratio;
+      var headCenter = {
+        x: initCenterX,
+        y: initCenterY
+      };
+      var distance = Math.max(0, Math.min(bubbleY * ratio, maxDistance))
+
+      _draw();
+
+      function _draw() {
+        var bubble = document.getElementById("cvs");
+        bubble.width = width;
+        bubble.height = height;
+        var ctx = bubble.getContext('2d');
+        ctx.clearRect(0, 0, bubble.width, bubble.height)
+        ctx.lineWidth = 1;
+        _drawBubble(ctx);
+
+        _drawArrow(ctx)
+
+      }
+
+      function _drawBubble(ctx) {
+        ctx.save()
+        ctx.beginPath()
+
+        const rate = distance / maxDistance
+        console.log(distance +"   "+maxDistance);
+        const headRadius = initRadius - (initRadius - minHeadRadius) * rate
+        // const headRadius = 24;
+        headCenter.y = initCenterY - (initRadius - minHeadRadius) * rate
+        // console.log(initCenterY +" "+initRadius+" "+ " "+minHeadRadius+" "+rate);
+
+
+        // 画上半弧线
+        ctx.arc(headCenter.x, headCenter.y, headRadius, 0, Math.PI, true);
+
+        // console.log(headRadius);
+
+        // console.log("headCenter.x--"+headCenter.x +"  "+" headCenter.y: "+ headCenter.y );
+
+        // 画左侧贝塞尔
+        const tailRadius = initRadius - (initRadius - minTailRadius) * rate
+        const tailCenter = {
+          x: headCenter.x,
+          y: headCenter.y + distance
+        }
+
+        const tailPointL = {
+          x: tailCenter.x - tailRadius,
+          y: tailCenter.y
+        }
+        const controlPointL = {
+          x: tailPointL.x,
+          y: tailPointL.y - distance / 2
+        }
+
+        ctx.quadraticCurveTo(controlPointL.x, controlPointL.y, tailPointL.x, tailPointL.y)
+
+        // 画下半弧线
+        ctx.arc(tailCenter.x, tailCenter.y, tailRadius, Math.PI, 0, true)
+
+        // 画右侧贝塞尔
+        const headPointR = {
+          x: headCenter.x + headRadius,
+          y: headCenter.y
+        }
+        const controlPointR = {
+          x: tailCenter.x + tailRadius,
+          y: headPointR.y + distance / 2
+        }
+        ctx.quadraticCurveTo(controlPointR.x, controlPointR.y, headPointR.x, headPointR.y)
+
+        ctx.fillStyle = 'rgb(170,170,170)'
+        ctx.fill()
+        ctx.strokeStyle = 'rgb(153,153,153)'
+        ctx.stroke()
+        ctx.restore()
+      }
+
+      function  _drawArrow(ctx) {
+        ctx.save()
+        ctx.beginPath()
+        const rate = distance / maxDistance
+        const arrowRadius = initArrowRadius - (initArrowRadius - minArrowRadius) * rate
+        // 画内圆
+        ctx.arc(headCenter.x, headCenter.y, arrowRadius - (arrowWidth - rate), -Math.PI / 2, 0, true)
+        // 画外圆
+        ctx.arc(headCenter.x, headCenter.y, arrowRadius, 0, Math.PI * 3 / 2, false)
+        ctx.lineTo(headCenter.x, headCenter.y - arrowRadius - arrowWidth / 2 + rate)
+        ctx.lineTo(headCenter.x + arrowWidth * 2 - rate * 2, headCenter.y - arrowRadius + arrowWidth / 2)
+
+        ctx.lineTo(headCenter.x, headCenter.y - arrowRadius + arrowWidth * 3 / 2 - rate)
+
+        ctx.fillStyle = 'rgb(255,255,255)'
+        ctx.fill()
+        ctx.strokeStyle = 'rgb(170,170,170)'
+        ctx.stroke()
+        ctx.restore()
+      }
+
+
+  }
+
+
+
+  // console.log(scroll);
+  </script>
+  </body>
+</html>
