@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"js":"var export1 = \"from export1\"\r\nvar export2 = function(){\r\n   return \"from export2\";\r\n}\r\nexports.export2 = export2;\r\n// export.export2 = export2;\r\n"},"hash":"163ccbbfc7a21bfeb23461497e5d5a47"}

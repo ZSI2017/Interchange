@@ -1,0 +1,1 @@
+{"dependencies":[{"name":"./common.js","dynamic":true}],"generated":{"html":"<!DOCTYPE html>\r\n<html>\r\n  <head>\r\n    <meta charset=\"utf-8\">\r\n    <title>模块导出</title>\r\n  </head>\r\n  <body>\r\n    <script src=\"/dist/bb9492a16759e6ad7c5b5ed4e55fa39c.js\"></script>\r\n  </body>\r\n</html>\r\n"},"hash":"e868e1033f606d9e440ba2f9bd6a6f33"}

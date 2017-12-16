@@ -1,0 +1,1 @@
+{"dependencies":[{"name":"./module.js","loc":{"line":1,"column":18}},{"name":"./export","loc":{"line":4,"column":22}}],"generated":{"js":"var md1 = require(\"./module.js\")\r\nconsole.log(md1);\r\n\r\nvar export3 = require(\"./export\");\r\nconsole.log(export3);\r\n"},"hash":"6b35a23bae2f3f9788438cfd0896dd24"}
