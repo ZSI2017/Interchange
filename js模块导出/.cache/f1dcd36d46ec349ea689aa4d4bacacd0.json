@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"js":"var module1 = \"from module1\";\r\nvar module2 = function(e){\r\n  return \"from funModule2\";\r\n}\r\n\r\nmodule.exports.str1 = module1;\r\nmodule.exports.fun2 = module2;\r\n"},"hash":"349ad4be11301a2cbfe48ac3b1da476c"}

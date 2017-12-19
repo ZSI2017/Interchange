@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"js":"\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nconst myModule1 = exports.myModule1 = {\n  c: 1\n};\nconst myModule2 = exports.myModule2 = {\n  d: 2\n};"},"hash":"52b9c277c39f480ff9e6682389518277"}
