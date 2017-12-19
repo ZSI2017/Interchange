@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>test</title>
+</head>
+
+<body>
+  <script>
+    function throttle(method, context) {
+      console.log(method.tId);
+      clearTimeout(method.tId);
+      method.tId = setTimeout(function() {
+        method.call(context)
+      }, 1000)
+    }
+
+    var i = 100;
+    function handler(){
+       console.log(i++);
+    }
+    window.onresize = function() {
+      throttle(handler, window)
+    }
+  </script>
+
+</body>
+
+</html>
