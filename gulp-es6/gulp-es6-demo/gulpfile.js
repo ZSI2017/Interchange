@@ -2,6 +2,8 @@
 var gulp = require('gulp');
 // 引入 babel 编译es6
 var babel = require('gulp-babel');
+
+var removeUseStrict = require("gulp-remove-use-strict");
 // 引入 gulp-webserver 模块
 var webserver = require('gulp-webserver');
 
@@ -169,7 +171,8 @@ var jsFiles = [
 gulp.task('packjs', function() {
   gulp.src(jsFiles)
     .pipe(babel({
-       presets:['es2015']
+       presets:['es2015'],
+       plugins: ["transform-remove-strict-mode"]
     }))
     .pipe(named())
     // .pipe(webpack({
@@ -195,7 +198,7 @@ gulp.task('packjs', function() {
       console.log('\x07', err.lineNumber, err.message);
       return this.end();
     }))
-
+    // .pipe(removeUseStrict())
     .pipe(gulp.dest('./dist/js/'))
 //    .pipe(rev.manifest())
 //  .pipe(gulp.dest('./dist/rev/js'));
