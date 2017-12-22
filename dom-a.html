@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>dom 操作</title>
+      <!-- <script src="https://a.alipayobjects.com/amui/zepto/1.1.3/zepto.js"></script> -->
+      <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="select-wrap">
+           <div class="select-span">
+               <span>选择一个</span>
+           </div>
+           <ul class="select-list">
+               <li>1111111111</li>
+               <li>2222222222</li>
+               <li>3333333333</li>
+           </ul>
+       </div>
+
+       <div class="select-wrap">
+              <div class="select-span">
+                  <span>选择一个</span>
+              </div>
+              <ul class="select-list">
+                  <li>1111111111</li>
+                  <li>2222222222</li>
+                  <li>3333333333</li>
+              </ul>
+          </div>
+      <script>
+       //点击打开点击关闭
+       $(".select-wrap .select-span").click(function(){
+           $(".select-wrap .select-list").slideToggle();
+       });
+       //下拉框里面的选中事件
+       $(".select-wrap .select-list li").on('click', function (e) {
+           e.stopPropagation();
+           $(this).parents('.select-wrap').find('span').html($(this).html());
+           $(this).parents('.select-wrap').find('.select-list').slideUp();
+           $(".select-wrap1 .select-list").slideDown('fast', 'swing');
+       })
+       //点击空白处,下拉框消失的代码
+       $(document).click(function(e) {
+           var target = $(e.target);
+           if(target.closest(".select-wrap").length == 0) {
+              $(".select-wrap .select-list").slideUp();
+           };
+       });
+ </script>
+
+  </body>
+</html>
