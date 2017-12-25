@@ -1,30 +1,272 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style>
-    input[type="text"] {
-      width: 240px;
-      height: 55px;
-      border: 1px #000 solid;
-      box-sizing: border-box;
-    }
+var selectDateEventForCityDirect = {
+	/**
+	 *  获取服务器时间
+	 *  @method
+	 *  @param  {Boolean} flag    是否单纯获取时间，不执行dom 渲染操作
+	 *  @return {null}            空
+	 */
+	getServerDate: function (flag) {
+		var seft = this;
+		ant.call('getServerTime', function (data) {
+			var bDate = new Date(data.time);
+			seft.otransfereedDate = {
+				"今天": getFullDate(bDate, 0, true),
+				"明天": getFullDate(bDate, 1, true)
+			}
+			if (flag) {
+				ant.setSessionData({
+					data: {
+						addressDateValue: JSON.parse(JSON.stringify(seft.otransfereedDate["今天"]))
+					}
+				});
+				return;
+			}
+			seft.initCurrentDate(bDate.getHours(), bDate.getMinutes())
+		})
+	},
 
-    input[type="submit"] {
-      position: relative;
-      top: 1px;
-      width: 50px;
-      height: 55px;
-      background-color: #fff;
-      border: 1px #000 solid;
-    }
-  </style>
-</head>
-<body>
-  <input type="text">
-  <input type="submit">
-</body>
-</html>
+	/**
+	 *  设置选择器数组
+	 *  @method
+	 *  @param  {Number} currentHours   获取的当前小时
+	 *  @param  {Number} currentMinutes 获取的当前分钟数
+	 *  @return {null}                [description]
+	 */
+	initCurrentDate: function (currentHours, currentMinutes) {
+		var flagMinutes = 1;
+		var self= this;
+		if(currentHours+1>=24){
+			this.aDate.shift();
+		}
+		for (var i = 0; i < this.aDate.length; i++) {
+			var k = 0;
+			// 默认当前后退一个小时
+			if (i === 0) k = (currentHours + 1) % 24;
+
+			for (; k < 24; k++) {
+				this.aHours.push({
+					"id": (1000 * i + k).toString(),
+					"value": k < 10 ? "0" + k : "" + k,
+					"parentId": i.toString()
+				});
+				var m = 0;
+				if (flagMinutes) {
+					m = currentMinutes % 5 ? parseInt(currentMinutes / 5) + 1 : parseInt(currentMinutes / 5);
+					if (m === 12) {
+						this.aHours.splice(1, 1);
+					}
+					flagMinutes = 0;
+
+				}
+				for (; m < 12; m++) {
+					this.aMinutes.push({
+						"id": (m + 10000 * k).toString(),
+						"value": m * 5 < 10 ? "0" + m * 5 : "" + m * 5,
+						"parentId": (1000 * i + k).toString()
+					})
+				}
+			}
+		}
+		this.initSelectDOM()
+	},
+
+	/**
+	 *  同城直送时间选择组件的入口
+	 *  @method
+	 *  @param  {Boolean} bHadTimeDateInSession  是否已经保存了时间相关时间在session中/是否从完善地址页面调用
+	 *  @param  {Boolean} getServerFlag         是否要先获取当前时间
+	 *  @param  {Boolean} enableButton          是否能够触发点击事件 -- 关键
+	 *  @return {null}                     null
+	 */
+	initselectDateEventForCityDirect: function (bHadTimeDateInSession, getServerFlag,enableButton,callback) {
+		var self = this;
+		this.callback = callback;
+		this.enableButton = enableButton;
+		this.bHadTimeDateInSession = bHadTimeDateInSession || "";
+		if (getServerFlag) {
+			this.getServerDate(true);
+		}
+		if (!this.bHadTimeDateInSession) {
+			ant.setSessionData({
+				data: {
+					addressDayValue: JSON.parse(JSON.stringify("今天")),
+					addressTimeValue: JSON.parse(JSON.stringify("立即取件")),
+					addressMinutesValue: JSON.parse(JSON.stringify("")),
+					addressTimeDate: JSON.parse(JSON.stringify(" ")),
+				}
+			});
+		}
+		$("#timeDate").html("立即取件");
+		var myBtn = $("#selectTime");
+		myBtn.unbind().click(function () {
+			if (!self.enableButton) {
+				return;
+			}
+			self.initSelectData();
+		})
+	},
+
+	/**
+	 *  生成 aDate, aHours,aMinutes 数组，并且初始化时间选择组件
+	 *  @method
+	 *  @param  {Boolean} bNewIosSelect   true ->只生成 aDate, aHours,aMinutes 数组,不初始化组件
+	 *  @return {null}
+	 */
+	initSelectData: function (bNewIosSelect,callback) {
+		this.bNewIosSelect = bNewIosSelect || ""
+		this.initCallback = callback;
+		this.aDate = [{
+			"id": "0",
+			"value": "今天",
+			"parentId": "0"
+		}, {
+			"id": "1",
+			"value": "明天",
+			"parentId": "0"
+		}]
+		this.aHours = [{
+				"id": "-1",
+				"value": "立即取件",
+				"parentId": "0"
+			}],
+		this.aMinutes = [{
+				"id": "-2",
+				"value": "",
+				"parentId": "-1"
+			}];
+		this.getServerDate();
+	},
+
+   /**
+    *  传入 数组参数，初始化时间选择组件
+    *  @method
+    *  @return {null}          [description]
+    */
+	initSelectDOM: function () {
+		if (this.bNewIosSelect) {
+			this.getSessionData();
+			return;
+		}
+		var seft = this;
+		var myBtn = $("#selectTime")
+		var dateId = myBtn.attr('data-date_id');
+		var hoursId = myBtn.attr('data-hours_id');
+		var minutesId = myBtn.attr('data-minutes_id');
+		var level = 3;
+		var options = {
+			title: "",
+			itemHeight: 35,
+			headerHeight: 42,
+			cssUtil: 'px',
+			relation: [1, 1, 1, 1],
+			oneLevelId: dateId,
+			twoLevelId: hoursId,
+			threeLevelId: minutesId,
+			callback: function (selectOneObj, selectTwoObj, selectThreeObj) {
+				myBtn.attr('data-date_id', selectOneObj.id);
+				myBtn.attr('data-date_value', selectOneObj.value);
+				myBtn.attr('data-hours_id', selectTwoObj.id);
+				myBtn.attr('data-hours_value', selectTwoObj.value);
+				myBtn.attr('data-minutes_id', selectThreeObj.id);
+				myBtn.attr('data-minutes_value', selectThreeObj.value);
+				var spanHtml = "<span style='padding-left:.05rem;'></span>";
+				if (selectTwoObj.value == "立即取件") {
+					$("#timeDate").html("立即取件");
+				} else {
+					$("#timeDate").html(JSON.parse(JSON.stringify("（" + selectOneObj.value + "）" + seft.otransfereedDate[selectOneObj.value] + spanHtml + selectTwoObj.value + ":" + selectThreeObj.value)));
+				}
+				$(".day1").val(JSON.parse(JSON.stringify(selectOneObj.value)));
+				$(".time1").val(JSON.parse(JSON.stringify(selectTwoObj.value)));
+				$(".minutes").val(JSON.parse(JSON.stringify(selectThreeObj.value)))
+				ant.setSessionData({
+					data: {
+						addressDayValue: JSON.parse(JSON.stringify(selectOneObj.value)),
+						addressTimeValue: JSON.parse(JSON.stringify(selectTwoObj.value)),
+						addressMinutesValue: JSON.parse(JSON.stringify(selectThreeObj.value)),
+						addressTimeDate: JSON.parse(JSON.stringify(selectOneObj.value + selectTwoObj.value)),
+						addressDateValue: JSON.parse(JSON.stringify(seft.otransfereedDate["今天"]))
+					}
+				});
+				seft.callback&&seft.callback();
+				checkInf && checkInf();
+			}
+		}
+		var data = [this.aDate, this.aHours, this.aMinutes];
+		var myScroll = new IosSelect(level, data, options);
+	},
+
+  /**
+   *  从session 中获取时间对应的缓存数据
+   *  @method
+   *  @return {null}
+   */
+	getSessionData:function(){
+		var self = this;
+		ant.getSessionData({
+			keys:['addressDayValue','addressTimeValue','addressMinutesValue','addressDateValue']
+		},function(result){
+			self.addressDayValue = result.data.addressDayValue;
+			self.addressTimeValue = result.data.addressTimeValue;
+			self.addressMinutesValue = result.data.addressMinutesValue;
+			self.addressDateValue = result.data.addressDateValue;
+			self.renderSessionData(self.addressDayValue, self.addressTimeValue, self.addressMinutesValue);
+		})
+	},
+
+	/**
+	 *  获取session 中保存成 date,time, minutes 数据，并设置到对应的时间选择组件中去，初始化
+	 *  @method
+	 *  @param  {String} addressDayValue     缓存中今天/明天 数据
+	 *  @param  {String} addressTimeValue    缓存中小时      数据
+	 *  @param  {String} addressMinutesValue 缓存中分钟     数据
+	 *  @return {null}
+	 */
+	renderSessionData: function (addressDayValue, addressTimeValue, addressMinutesValue) {
+		var seft = this;
+		var spanHtml = "<span style='padding-left:.05rem;'></span>";
+		var myBtn = $("#selectTime");
+		var oldDayId = addressDayValue == "今天" ? '0' : '1';
+		var oldTimeId = addressTimeValue == "立即取件" ? "-1" : ""
+		var hoursArr = this.aHours.filter(function (item, index) {
+			return item.parentId == oldDayId && (parseInt(item.value)||-1) >= (parseInt(addressTimeValue)||-1)
+		})
+		var MinutesArr = this.aMinutes.filter(function (item, index) {
+			return item.parentId == hoursArr[0].id && (parseInt(item.value)||-1) >= (parseInt(addressMinutesValue)||-1)
+		})
+		// 跨越了一天,做特殊处理
+		if (this.addressDateValue === this.otransfereedDate["明天"]) {
+			if(oldDayId == "0"){
+				hoursArr.unshift({
+					"id": "0",
+					"value": "00",
+					"parentId": "0"
+				})
+			}else {
+				oldDayId = "0";
+				addressDayValue = "今天"
+			}
+		}
+		myBtn.attr('data-date_id', oldDayId);
+		myBtn.attr('data-hours_id', hoursArr[0].id);
+		myBtn.attr('data-minutes_id', MinutesArr[0].id);
+		$(".day1").val(JSON.parse(JSON.stringify(addressDayValue)));
+		$(".time1").val(JSON.parse(JSON.stringify(hoursArr[0].value)));
+		$(".minutes").val(JSON.parse(JSON.stringify(MinutesArr[0].value)))
+		if (addressTimeValue == "立即取件") {
+			$("#timeDate").html("立即取件");
+		} else {
+			$("#timeDate").html(JSON.parse(JSON.stringify("（" + addressDayValue + "）" + seft.otransfereedDate[addressDayValue] + spanHtml + hoursArr[0].value + ":" + MinutesArr[0].value)));
+		}
+		this.initCallback && this.initCallback();
+	},
+
+   /**
+    *  为点击事件设置开关
+    *  @method
+    *  @param  {Boolean} newValue 传入的新值
+    *  @return {null}
+    */
+	setEnableButton:function(newValue){
+		this.enableButton = newValue
+	}
+}
