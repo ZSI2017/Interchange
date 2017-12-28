@@ -1,0 +1,85 @@
+/* css重置 */
+
+body, h1, input, textarea {
+  margin: 0;
+  padding: 0;
+}
+
+input, textarea {
+  outline: none;
+}
+
+/* 清除浮动 */
+
+.clear::before, .clear:after {
+  display: table;
+  content: "";
+}
+
+.clear:after {
+  clear: both;
+}
+
+.clear {
+  *zoom: 1;
+}
+
+/* 外层 */
+
+.container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 标题 */
+
+.msg-title {
+  padding: 20px 0;
+  text-align: center;
+  color: lightseagreen;
+}
+
+.msg-content {
+  box-shadow: 0 0 5px #ddd;
+  padding: 20px;
+}
+
+/* 每个item */
+
+.msg-item {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 邮箱地址 */
+
+.msg-item input[type=text] {
+  padding: 10px;
+  font-size: 20px;
+}
+
+/* 留言区域 */
+
+.msg-item textarea {
+  width: 100%;
+  height: 100px;
+}
+
+/* 留言按钮 */
+
+.msg-item input[type=button] {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  background-color: lightseagreen;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 2px #17837d;
+  float: right;
+}
+
+.msg-item input[type=button]:active {
+  box-shadow: 0 0 4px #0e524e;
+}

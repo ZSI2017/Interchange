@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>删除元素</title>
+  </head>
+  <body>
+      <ul id="myUl">
+        <li>
+           <span>2ddd </span>
+           <span> ‎2017‎年‎12‎月‎28‎日‎ ‎19‎:‎03‎:‎55</span>
+           <a href="javascript:void(0);">2222222222</a>
+        </li>
+        <li>
+           <span>2ddd </span>
+           <span> ‎2017‎年‎12‎月‎28‎日‎ ‎19‎:‎03‎:‎55</span>
+           <a href="javascript:void(0);">333</a>
+        </li>
+        <li>
+          <span>2ddd </span>
+          <span> ‎2017‎年‎12‎月‎28‎日‎ ‎19‎:‎03‎:‎55</span>
+          <a href="javascript:void(0);">333</a>
+        </li>
+        <li>
+          <span>2ddd </span>
+          <span> ‎2017‎年‎12‎月‎28‎日‎ ‎19‎:‎03‎:‎55</span>
+          <a href="javascript:void(0);">444</a>
+        </li>
+        <li>
+          <span>2ddd </span>
+          <span> ‎2017‎年‎12‎月‎28‎日‎ ‎19‎:‎03‎:‎55</span>
+          <a href="javascript:void(0);">5555</a>
+        </li>
+
+      </ul>
+
+  <script>
+      var msgList = document.getElementById("myUl");
+      msgList.addEventListener('click',function(e){
+        var e = e || window.e;
+        var target = e.target || e.srcElement;
+        if(target.nodeName.toLowerCase()== 'a') {
+           console.log(target.parentNode);
+           msgList.removeChild(target.parentNode)
+        }
+      },false)
+  </script>
+
+  </body>
+</html>
