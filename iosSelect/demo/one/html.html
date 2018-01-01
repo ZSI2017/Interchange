@@ -9,19 +9,21 @@
         (function() {
         var hm = document.createElement("script");
         hm.src = "//hm.baidu.com/hm.js?b25bf95dd99f58452db28b1e99a1a46f";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
         })();
     </script>
 </head>
 <body>
 <a href="https://github.com/zhoushengmufc/iosselect">查看文档</a>
-<div class="form-item item-line">                 
-    <label>请选择银行</label>                 
-    <div class="pc-box">                     
-        <input type="hidden" name="bank_id" id="bankId" value="">                     
-        <span id="showBank">点击这里选择银行</span>  
-    </div>             
+<div ></div>
+<div class="form-item item-line">
+    <label>请选择银行</label>
+    <div style = "height:1000px;width:100%;background-color:black;"></div>
+    <div class="pc-box">
+        <input type="hidden" name="bank_id" id="bankId" value="">
+        <span id="showBank">点击这里选择银行</span>
+    </div>
 </div>
     <div class="container"></div>
 </body>
@@ -35,11 +37,11 @@
         var bankId = showBankDom.dataset['id'];
         var bankName = showBankDom.dataset['value'];
 
-        var bankSelect = new IosSelect(1, 
+        var bankSelect = new IosSelect(1,
             [data],
             {
                 container: '.container',
-                title: '银行卡选择',
+                title: '取消 .scrollTop()',
                 itemHeight: 50,
                 itemShowCount: 3,
                 oneLevelId: bankId,
