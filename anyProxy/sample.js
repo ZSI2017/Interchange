@@ -1,15 +1,59 @@
+// var index_info = require("./index_info.js");
+// var express_com_list_v2 = require("./express_com_list_v2.js");
+var ep_index_index = require("./ep_order_index.js");
+var fs = require('fs');
+var path = require("path");
+// var file = path.resolve('C:/Users/bangbangda/Desktop/express/expressTemp/sendex-client/src/index.html');
+// var file = path.resolve('./index.html');
+// var rs = fs.createReadStream(file);
+
 module.exports = {
   summary: 'a rule to hack response',
   *beforeSendResponse(requestDetail, responseDetail) {
-    if (requestDetail.url === 'https://sendex-sit.alipay-eco.com/api/ep/index_info') {
-      const newResponse = responseDetail.response;
-      newResponse.body = '{"meta":{"code":"0000","msg":"成功","success":true},"result":{"notPaidOrderNo":"","sendApps":[{"id":25,"icon":"https://expresssit.oss-cn-hangzhou.aliyuncs.com/SendAppLogo/272c1d59-89e7-4b6d-9662-8cdd4b9eb352.png","slogan":"-","logo":"https://expresssit.oss-cn-hangzhou.aliyuncs.com/SendAppLogo/eac02e8b-48e8-4a49-b863-9c8b8642fe77.png","linkUrl":"address-information.html","markPrice":0,"description":"精准比价 在线支付","tag":"-","name":"预约寄件"},{"id":241,"icon":"","slogan":null,"logo":"https://expresssit.oss-cn-hangzhou.aliyuncs.com/SendAppLogo/3d7ce7d9-6d92-4630-8a71-2045986f15d1.png","linkUrl":"https://h5.m.taobao.com/guoguo/grap2post-alipay/index.html?defaultTab=pick","markPrice":0,"description":"快递员免费取件","tag":null,"name":"liqi裹裹"},{"id":27,"icon":"","slogan":"-","logo":"https://expresssit.oss-cn-hangzhou.aliyuncs.com/SendAppLogo/31d4a26a-b9f4-49b2-bf21-65ea9e548f8d.png","linkUrl":"address-information.html?fromCityDirect=1","markPrice":0,"description":"专人快递送达全城","tag":"-","name":"同城直送"},{"id":29,"icon":"","slogan":"-","logo":"https://expresssit.oss-cn-hangzhou.aliyuncs.com/SendAppLogo/d1c4e16f-b099-491d-b5c1-259f61aa85ee.png","linkUrl":"city-transport.html","markPrice":0,"description":"大件专车拉货搬家","tag":"-","name":"同城货运"},{"id":28,"icon":"","slogan":"-","logo":"https://expresssit.oss-cn-hangzhou.aliyuncs.com/SendAppLogo/4ea083f8-81dd-4ee3-8243-06a5cc9a5650.png","linkUrl":"near-list.html","markPrice":0,"description":"周围网点位置电话","tag":"-","name":"附近快递资源"},{"id":46,"icon":"","slogan":"-","logo":"https://expresssit.oss-cn-hangzhou.aliyuncs.com/SendAppLogo/e5d1eeed-49b4-465a-b4f1-c17279a6c35c.png","linkUrl":"selectExpressPlaceOrder.html","markPrice":0,"description":"直接指定快递取件","tag":"-","name":"选快递下单"}],"serviceAuthStatus":"1","notPaidRemindCnt":0}}'
-
-      return new Promise((resolve, reject) => {
-        setTimeout(() => { // delay
-          resolve({ response: newResponse });
-        }, 5000);
-      });
+    var newResponseStr = "";
+    if(requestDetail.url === 'https://sendex-sit.alipay-eco.com/api/ep/index_info'){
+      newResponseStr = JSON.stringify(index_info)
+    }else if(requestDetail.url === 'https://sendex-sit.alipay-eco.com/api/ep/express_com/list/v2'){
+      newResponseStr = JSON.stringify(express_com_list_v2)
+    }else if(requestDetail.url === 'https://sendex-sit.alipay-eco.com/api/ep/order/index'){
+      newResponseStr = JSON.stringify(ep_index_index)
     }
-  },
+
+    // if(requestDetail.url.indexOf('index.html') === 0){
+    //   // console.log("[own log]["+ "]")
+    //   // return new Promise((resolve,reject)=>{
+    //   //   fs.readFile("C:/Users/bangbangda/Desktop/express/expressTemp/sendex-client/src/index.html",(err,data) =>{
+    //   //     // var result=Buffer.concat(dataArr,len).toString();
+    //   //          const newResponse = responseDetail.response;
+    //   //          newResponse.body = data;
+    //   //          resolve({ response: newResponse });
+    //   //
+    //   //   })
+    //   // })
+    //   //   rs.on('data',function(chunk){
+    //   //     // console.log(Buffer.isBuffer(chunk));
+    //   //     dataArr.push(chunk);
+    //   //     len+=chunk.length;
+    //   //     console.log("data------ "+len)
+    //   //    });
+    //   //   rs.on('end',() => {
+    //   //       var result=Buffer.concat(dataArr,len).toString();
+    //   //       const newResponse = responseDetail.response;
+    //   //       newResponse.body = newResponseStr;
+    //   //       resolve({ response: newResponse });
+    //   //   });
+    //   // })
+    // }else {
+      if (newResponseStr !== "") {
+        const newResponse = responseDetail.response;
+        newResponse.body = newResponseStr;
+
+        return new Promise((resolve, reject) => {
+          setTimeout(() => { // delay
+            resolve({ response: newResponse });
+          }, 1000);
+        });
+      }
+    // }
+  }
 };
