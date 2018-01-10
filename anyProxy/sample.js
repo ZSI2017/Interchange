@@ -12,4 +12,7 @@ module.exports = {
       });
     }
   },
+  *beforeDealHttpsRequest(requestDetail) {
+     return true;
+  }
 };
