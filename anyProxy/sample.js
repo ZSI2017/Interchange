@@ -1,5 +1,5 @@
-// var index_info = require("./index_info.js");
-// var express_com_list_v2 = require("./express_com_list_v2.js");
+var index_info = require("./index_info.js");
+var express_com_list_v2 = require("./express_com_list_v2.js");
 var ep_index_index = require("./ep_order_index.js");
 var fs = require('fs');
 var path = require("path");
@@ -18,42 +18,31 @@ module.exports = {
     }else if(requestDetail.url === 'https://sendex-sit.alipay-eco.com/api/ep/order/index'){
       newResponseStr = JSON.stringify(ep_index_index)
     }
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    console.log(requestDetail.url.toString().indexOf("index.html"));
+    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+    if(requestDetail.url == "https://sendex-sit.alipay-eco.com/h5/index.html"){
+      console.log("lllllllllllllllllllllllllllllllllllllllllllll")
+      console.log("[own log][ "+new Date().toTimeString() +" ]")
+      return new Promise((resolve,reject)=>{
+        fs.readFile("C:/Users/bangbangda/Desktop/express/expressTemp/sendex-client/src/index.html",(err,data) =>{
+               const newResponse = responseDetail.response;
+               newResponse.body = data;
+               resolve({ response: newResponse })
+        })
+      })
 
-    // if(requestDetail.url.indexOf('index.html') === 0){
-    //   // console.log("[own log]["+ "]")
-    //   // return new Promise((resolve,reject)=>{
-    //   //   fs.readFile("C:/Users/bangbangda/Desktop/express/expressTemp/sendex-client/src/index.html",(err,data) =>{
-    //   //     // var result=Buffer.concat(dataArr,len).toString();
-    //   //          const newResponse = responseDetail.response;
-    //   //          newResponse.body = data;
-    //   //          resolve({ response: newResponse });
-    //   //
-    //   //   })
-    //   // })
-    //   //   rs.on('data',function(chunk){
-    //   //     // console.log(Buffer.isBuffer(chunk));
-    //   //     dataArr.push(chunk);
-    //   //     len+=chunk.length;
-    //   //     console.log("data------ "+len)
-    //   //    });
-    //   //   rs.on('end',() => {
-    //   //       var result=Buffer.concat(dataArr,len).toString();
-    //   //       const newResponse = responseDetail.response;
-    //   //       newResponse.body = newResponseStr;
-    //   //       resolve({ response: newResponse });
-    //   //   });
-    //   // })
-    // }else {
+    }else {
       if (newResponseStr !== "") {
         const newResponse = responseDetail.response;
         newResponse.body = newResponseStr;
 
         return new Promise((resolve, reject) => {
           setTimeout(() => { // delay
-            resolve({ response: newResponse });
+            resolve({ response: newResponse })
           }, 1000);
         });
       }
-    // }
+    }
   }
 };

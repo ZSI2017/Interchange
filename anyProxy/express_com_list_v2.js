@@ -1,5 +1,4 @@
 var list_v2 = {
-	{
 		"meta": {
 			"code": "0000",
 			"msg": "成功",
@@ -94,6 +93,5 @@ var list_v2 = {
 			}]
 		}
 	}
-}
 
 module.exports = list_v2;
