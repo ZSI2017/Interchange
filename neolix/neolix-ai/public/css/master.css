@@ -1,0 +1,369 @@
+body {
+  font: 14px/24px Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", STHeiti, "华文细黑", sans-serif;
+  background: blue;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  zoom: 1;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, i, samp, strong, span, a, th, input, select, textarea, address, cite, code, em, label, p, button {
+  font-family: Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", STHeiti, "华文细黑", sans-serif;
+  font-weight: 300;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, hr, p, iframe, dl, dt, dd, ul, ol, li, pre, form, button, input, textarea, th, td, fieldset {
+  margin: 0;
+  padding: 0
+}
+
+* {
+  word-wrap: break-word
+}
+
+html, body {
+  *position: static
+}
+
+a {
+  color: #2d374b;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+i, em {
+  font-style: normal;
+}
+
+img {
+  visibility: hidden;
+}
+
+/*  头部 */
+
+.header {
+  box-sizing: border-box;
+  width: 100%;
+  height: 5.5%;
+  line-height: 1;
+  background-color: rgba(26, 26, 26, 0.9);
+  padding: 17px 0 0 36px;
+}
+
+.header img {
+  width: 6.927%;
+  display: inline-block;
+  margin-left: 10px;
+  /* margin: 4px 0 0 */
+}
+
+/* 中间内容区域  */
+
+.content {
+  position: absolute !important;
+  top: 0px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  /* width: 1585px; */
+  /* min-width: 1585px; */
+  box-sizing: border-box;
+  margin: 0 auto;
+  text-align: center;
+  background-color: black;
+  background-color: rgba(52, 52, 52, 0);
+}
+
+.content img {
+  margin: 0 auto;
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  animation: start 1.5s ease-in-out;
+  -moz-animation: start 1.5s ease-in-out;
+  -webkit-animation: start 1.5s ease-in-out;
+  -o-animation: start 1.5s ease-in-out;
+  -ms-animation: start 1.5s ease-in-out;
+}
+
+@-webkit-keyframes start1 {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+    /* -webkit-transform: translate(0, 10px); */
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+    /* -webkit-transform: translate(0, 0); */
+  }
+  100% {
+    opacity: 1;
+    /* -webkit-transform: translate(0, -8px); */
+  }
+}
+
+@-ms-keyframes start1 {
+  0% {
+    opacity: 0;
+    -khtml-opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+    /* -webkit-transform: translate(0, 10px); */
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+    /* -webkit-transform: translate(0, 0); */
+  }
+  100% {
+    opacity: 1;
+    /* -webkit-transform: translate(0, -8px); */
+  }
+}
+
+@keyframes start1 {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+    /* -webkit-transform: translate(0, 10px); */
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+    /* -webkit-transform: translate(0, 0); */
+  }
+  100% {
+    opacity: 1;
+    /* -webkit-transform: translate(0, -8px); */
+  }
+}
+
+.sub-header {
+  position: relative;
+  top: 17.4%;
+  height: 4.9%;
+  padding-left: 19%;
+}
+
+.sub-header img {
+  height: auto;
+  width: 34.4%;
+  animation: start 1.5s ease-in-out;
+  -moz-animation: start 1.5s ease-in-out;
+  -webkit-animation: start 1.5s ease-in-out;
+  -o-animation: start 1.5s ease-in-out;
+  -ms-animation: start 1.5s ease-in-out;
+}
+
+@keyframes left {
+  from {
+    /* padding-left: 0; */
+    transform: translateX(-1000px);
+  }
+  to {
+    /* padding-left: 19.6%; */
+    transform: translateX(0px);
+  }
+}
+
+/* 尾部  */
+
+.footer {
+  position: absolute !important;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: rgba(52, 52, 52, .2);
+}
+
+.footer-container {
+  /* width:1126px; */
+  margin: 0 auto;
+  padding: 15px 0;
+  z-index: 999;
+  text-align: center;
+}
+
+.footer-container p {
+  color: #fff;
+}
+
+body {
+  background: url("/public/images/02-06/bg.png") no-repeat;
+  background-size: 100% 100%;
+  /* min-width: 1400px; */
+}
+
+/* 滚动条 */
+
+/* 假设.device的宽度是设备的宽度*/
+
+.device {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 4.8%;
+  transform: translate(-50%, -110%);
+}
+
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 125px;
+}
+
+.marquee>.get-marquee-width {
+  position: relative;
+}
+
+.marquee>.get-marquee-width>.marquee-move {
+  -webkit-animation: marquee 7s linear 0.5s infinite;
+  -o-animation: marquee 7s linear 0.5s infinite;
+  animation: marquee 7s linear 0.5s infinite;
+  position: absolute;
+  width: 100%;
+  left: 100%;
+  /* padding-left: 50px; */
+  white-space: nowrap;
+}
+
+.marquee>.get-marquee-width>.marquee-move img {
+  width: 100%;
+  height: auto;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@-moz-keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@-o-keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
+@media screen and (min-width:1281px) {
+  /* body {
+    background: url("/public/images/02-06/bg.png") no-repeat;
+    background-size: 100% 100%; */
+  /* min-width: 1400px; */
+  /* } */
+}
+
+@media screen and (max-width: 1280px) {
+  /* body {
+    background: url("/public/images/02-06/bg.png") no-repeat;
+    background-size: 100% 100%;
+  } */
+}
+
+@media only screen and (max-width: 760px) {
+  .header {
+    display: none;
+  }
+  @media screen and (orientation: portrait) {
+    /*竖屏 css*/
+    body {
+      background: url("/public/images/mobile/bg.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    #car {
+      height: auto;
+      width: 100%;
+      margin-top: 25%;
+    }
+    .device {
+      top: 0;
+      left: 50%;
+      margin-top: 48%;
+      height: 4.8%;
+      transform: translate(-50%, 150%);
+    }
+    .footer-container {
+      padding: 8px 10px;
+    }
+    .footer-container p {
+      font-size: 10px;
+      color: #fff;
+      line-height: 18px;
+    }
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height:500px) {
+  /*横屏 css*/
+  body {
+    background: url("/public/images/mobile/orientation/bg.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  #car {
+    height: 100%;
+    width: auto;
+    margin-top: 0;
+  }
+  .device {
+    top: 34%;
+    left: 50%;
+    /* margin-top: 15%; */
+    height: 4.8%;
+    transform: translate(-50%, -40%);
+  }
+  .footer-container {
+    padding: 8px 10px;
+  }
+  .footer-container p {
+    font-size: 10px;
+    color: #fff;
+    line-height: 18px;
+  }
+}
