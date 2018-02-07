@@ -7,50 +7,23 @@
 
 <body>
 
+  <div id="div_add"></div>
+   <input type="button" id="btn1" value="增加"/>
+
   <script>
-    // y = ax +b;
-    var abs = 0.01;
-    var a1 = 116.442031,
-      b1 = 40.002204,
-      a2 = 116.454059,
-      b2 = 39.978367,
-      a3, b3, a4, b4;
 
+   var addHTML = '<div class="div_list"></div>';
+   $("#div_add").append(addHTML);
+   $("#btn1").click(function () {
+       var aa = $(".div_list").length;
+       $("#div_add").append(addHTML);
+     if (aa >=5) {
+           $("#btn1").attr("disabled", "disabled");
+           return true;
+       }
+   });
 
-    console.log(getResult(116.442031, 40.002204, 116.454059, 39.978367));
   </script>
 </body>
 
 </html>
-
-<script>
-{
-	"meta": {
-		"code": "0000",
-		"msg": "成功",
-		"success": true
-	},
-	"result": {
-		"pricingMode": "1",
-		"addServices": "",
-		"times": {
-			"isChangeTime": "2"
-		},
-		"goodsTypes": ["文件", "食品", "蛋糕", "日用品", "手机", "电脑", "鲜花", "其它"],
-		"goodsMaxWeight": "50000",
-		"servicingText": "08:30-18:30下单可取，逾时请预约次日服务",
-		"productTypes": [{
-			"presetWeight": 2000,
-			"presetWeightPrice": 100,
-			"productTypeId": 145,
-			"extraWeightPrice": 200,
-			"productTypeCode": "2",
-			"description": "ddd",
-			"productTypeName": "标准快递",
-			"extraWeightUnit": 2000,
-			"discount": 100
-		}]
-	}
-}
-
-</script>
