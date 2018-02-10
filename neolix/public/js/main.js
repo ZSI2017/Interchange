@@ -7,6 +7,7 @@ $(function () {
 	if ($(document).width() <= 414) {
 		$("#car").attr("src", "/public/images/mobile/car.png")
 		$(".marquee-move img").attr("src", "/public/images/mobile/text.png")
+		$(".device").css('width',scrollWidth * 0.36)
 	} else if(orientation() === "landscape"){
 		$("#car").attr("src", "/public/images/mobile/orientation/car.png");
 		$(".device").css('width',Math.min(scrollWidth,scrollHeight) * 0.34)
@@ -37,12 +38,15 @@ $(function () {
   * @return {[type]} [description]
   */
 	window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+		// alert(window.orientation)
+		// alert($(document).height())
+		var borientation = "onorientationchange" in window;
 		if(isMobile){
-			if (window.orientation === 180 || window.orientation === 0||($(window).height()>$(window).width())) {
+			if (window.orientation === 180 || window.orientation === 0||(!borientation&&$(window).height()>$(window).width())) {
 				 $("#car").attr("src", "/public/images/mobile/car.png");
-				 $(".device").css('width',$(document).height()* 0.24)
+				 $(".device").css('width',Math.min(scrollHeight,$(document).width())* 0.36)
 			}
-			if (window.orientation === 90 || window.orientation === -90||($(window).height()<$(window).width())){
+			if (window.orientation === 90 || window.orientation === -90||(!borientation&&$(window).height()<$(window).width())){
 				 $("#car").attr("src", "/public/images/mobile/orientation/car.png");
 				 $(".device").css('width',Math.min(scrollWidth,$(document).height()) * 0.34)
 			}
