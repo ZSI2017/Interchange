@@ -215,7 +215,7 @@ var selectDateEventForCityDirect = {
 
 	/**
 	 *  获取session 中保存成 date,time, minutes 数据，并设置到对应的时间选择组件中去，初始化
-	 *  @method  回顾设置method 方法
+	 *  @method
 	 *  @param  {String} addressDayValue     缓存中今天/明天 数据
 	 *  @param  {String} addressTimeValue    缓存中小时      数据
 	 *  @param  {String} addressMinutesValue 缓存中分钟     数据
