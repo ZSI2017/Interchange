@@ -10,19 +10,22 @@
   <div id="div_add"></div>
    <input type="button" id="btn1" value="增加"/>
 
+   <input type="button" id="btn2" value="测试一下"/>
   <script>
-
-   var addHTML = '<div class="div_list"></div>';
-   $("#div_add").append(addHTML);
-   $("#btn1").click(function () {
-       var aa = $(".div_list").length;
-       $("#div_add").append(addHTML);
-     if (aa >=5) {
-           $("#btn1").attr("disabled", "disabled");
-           return true;
-       }
-   });
-
+     var addHTML = '<div class="div_list"></div>';
+     $("#div_add").append(addHTML);
+     $("#btn2").click(function(){
+       alert("just clicked")
+     })
+     $("#btn1").click(function () {
+        $("#btn2").click();
+         var aa = $(".div_list").length;
+         $("#div_add").append(addHTML);
+       if (aa >=5) {
+             $("#btn1").attr("disabled", "disabled");
+             return true;
+         }
+     });
   </script>
 </body>
 
