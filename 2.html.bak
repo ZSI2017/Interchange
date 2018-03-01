@@ -1,7 +1,5 @@
 var selectDateEventForCityDirect = {
 	/**
-	 * 02-17
-	 * 02-19
 	 *  获取服务器时间
 	 *  @method
 	 *  @param  {Boolean} flag    是否单纯获取时间，不执行dom 渲染操作
@@ -16,11 +14,6 @@ var selectDateEventForCityDirect = {
 				"明天": getFullDate(bDate, 1, true)
 			}
 			if (flag) {
-				<!-- ant.setSessionData({
-					data:{
-						addressDayValue:JSON.parse(JSON.stringify(seft.otransferredDate["今天"]))
-					}
-				}) -->
 				ant.setSessionData({
 					data: {
 						addressDateValue: JSON.parse(JSON.stringify(seft.otransfereedDate["今天"]))
@@ -222,7 +215,7 @@ var selectDateEventForCityDirect = {
 
 	/**
 	 *  获取session 中保存成 date,time, minutes 数据，并设置到对应的时间选择组件中去，初始化
-	 *  @method  回顾设置method 方法
+	 *  @method
 	 *  @param  {String} addressDayValue     缓存中今天/明天 数据
 	 *  @param  {String} addressTimeValue    缓存中小时      数据
 	 *  @param  {String} addressMinutesValue 缓存中分钟     数据
