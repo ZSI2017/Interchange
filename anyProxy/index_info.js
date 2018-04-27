@@ -15,7 +15,7 @@ var index_info = {
 			"markPrice": 0,
 			"description": "精准比价 在线支付",
 			"tag": "-",
-			"name": "预约寄件"
+			"name": "预约寄"
 		}, {
 			"id": 241,
 			"icon": "",
@@ -25,7 +25,7 @@ var index_info = {
 			"markPrice": 0,
 			"description": "快递员免费取件",
 			"tag": null,
-			"name": "liqi裹裹"
+			"name": "菜鸟裹裹"
 		}, {
 			"id": 27,
 			"icon": "",
@@ -68,6 +68,7 @@ var index_info = {
 			"name": "选快递下单"
 		}],
 		"serviceAuthStatus": "1",
+		"isPublic": true,
 		"notPaidRemindCnt": 0
 	}
 };

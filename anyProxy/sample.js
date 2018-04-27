@@ -21,7 +21,7 @@ module.exports = {
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     console.log(requestDetail.url.toString().indexOf("index.html"));
     console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-    if(requestDetail.url == "https://sendex-sit.alipay-eco.com/h5/index.html"){
+    if(requestDetail.url == "h"){
       console.log("lllllllllllllllllllllllllllllllllllllllllllll")
       console.log("[own log][ "+new Date().toTimeString() +" ]")
       return new Promise((resolve,reject)=>{

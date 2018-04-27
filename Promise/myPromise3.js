@@ -1,5 +1,13 @@
 //  对于 Promise 链式调用的 容错处理
 // myPromise
+Promise.deferred = function () {
+  let dfd = {};
+  dfd.promise = new Promise(function (resolve, reject) {
+      dfd.resolve = resolve;
+      dfd.reject = reject;
+  });
+  return dfd
+}
 function Promise(executor){ //executor是一个执行器（函数）
     let _this = this // 先缓存this以免后面指针混乱
     _this.status = 'pending'  // 默认状态为等待态
@@ -130,13 +138,6 @@ function resolvePromise(promise2, x, resolve, reject) {
     }
 }
 
-Promise.deferred = function () {
-  let dfd = {};
-  dfd.promise = new Promise(function (resolve, reject) {
-      dfd.resolve = resolve;
-      dfd.reject = reject;
-  });
-  return dfd
-}
+
 
 module.exports = Promise  // 导出模块，否则别的文件没法使用

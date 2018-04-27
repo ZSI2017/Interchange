@@ -54,7 +54,7 @@ var self = {
 
 		self._transformDownWrap(-self.offset + y);
 	},
-	triggerDownLoading: function () {
+	triggerDownLoading: function (cb) {
 		// this.downLoading = true;
 		this.downHight = 0;
 		// this._translate(this.downHight, 300);
@@ -63,10 +63,11 @@ var self = {
 		document.querySelector("#setTitle span").innerHTML = "正在";
 		this.events[EVENT_DOWN_LOADING]();
 		setTimeout(function () {
+			console.log("begin ajax")
 			self.endDownLoading();
 			self.downWrapProgress.classList.remove(CLASS_ROTATE);
 		}, 1000)
-		console.log("success");
+		cb();
 	},
 	_transformDownWrap: function (offset, duration, isForce) {
 
@@ -112,12 +113,6 @@ function pushDownRefresh(ListentEvent1, ListentEvent2, ListentEvent3, content1, 
 	// 	timeOut = -5;
 	// }
 	content.addEventListener('touchstart', (event) => {
-		// if (!refreshFlag) {
-		// 	return;
-		// }
-		// var touchTarget = event.targetTouches[0];
-		//
-		// _start = touchTarget.pageY;
 
 		touchstartEvent(event)
 
@@ -125,46 +120,26 @@ function pushDownRefresh(ListentEvent1, ListentEvent2, ListentEvent3, content1, 
 
 	content.addEventListener('touchmove', (e) => {
 		touchmoveEvent(e);
-		// console.log(`scrolll   ${$(window).scrollTop()}`);
-		// var y = $(window).scrollTop();
-		//
+});
+	content.addEventListener('touchend', (e) => {
+		touchendEvent(e,callback);
+		// endLose = false;
 		// if (!refreshFlag) {
 		// 	return;
 		// }
-		// var touchTarget = e.targetTouches[0];
-		//
-		// _end = _start - touchTarget.pageY;
-		// // console.log("end touchmove"+_end);
-		// if (_end <= timeOut && $(window).scrollTop() <= 0) {
-		// 	ListentEvent1(_end);
-		// 	contentId.style.webkitTransform = `translate(0px, ${0 - _end}px) translateZ(0px)`;
-		// 	contentId.style.transform = `translate(0px, ${0 - _end}px) translateZ(0px)`;
-		// 	setTimeout(() => {
-		// 		if (endLose) {
-		// 			callback();
-		// 		}
-		// 	}, 2000);
+		// if (_end < timeOut && $(window).scrollTop() <= 0) {
+		// 	callback();
 		// }
 	});
-	content.addEventListener('touchend', (e) => {
-		touchendEvent(e);
-		endLose = false;
-		if (!refreshFlag) {
-			return;
-		}
-		if (_end < timeOut && $(window).scrollTop() <= 0) {
-			callback();
-		}
-	});
 	content.addEventListener('touchcancel', (e) => {
-		touchendEvent(e);
-		endLose = false;
-		if (!refreshFlag) {
-			return;
-		}
-		if (_end < timeOut && $(window).scrollTop() <= 0) {
-			callback();
-		}
+		touchendEvent(e,callback);
+		// endLose = false;
+		// if (!refreshFlag) {
+		// 	return;
+		// }
+		// if (_end < timeOut && $(window).scrollTop() <= 0) {
+		// 	callback();
+		// }
 	});
 }
 
@@ -290,7 +265,7 @@ function touchmoveEvent(e) {
 	}
 }
 
-var touchendEvent = function (e) {
+var touchendEvent = function (e,cb) {
 	// alert("ddd");
 	var options = self.options;
 
@@ -299,7 +274,7 @@ var touchendEvent = function (e) {
 		// 如果下拉区域已经执行动画,则需重置回来
 		if (self.downHight >= self.offset) {
 			// 符合触发刷新的条件
-			self.triggerDownLoading();
+			self.triggerDownLoading(cb);
 		} else {
 			// 否则默认重置位置
 			self._translate(0);

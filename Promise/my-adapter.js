@@ -1,4 +1,4 @@
-let Promise = require('./myPromise3');
+
 Promise.deferred = function () {
   let dfd = {};
   dfd.promise = new Promise(function (resolve, reject) {
